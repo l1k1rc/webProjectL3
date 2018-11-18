@@ -1,0 +1,514 @@
+/**************************************************************************************** Keyframes ************************************************************************************************/
+/*Keyframes : permet de créer une animation qui changera un élément pendant un temps donnée et à partir d'un temps donné, se référer aux commandes "animation: nomAnim 2s ease-in-out 0s forwards; "*/
+@keyframes pop{ 
+    0% {opacity: 0; width: 25%; background-color: black; color: black; border-radius: 1px 1px 1px 1px;}
+    100% {opacity: 0.9; width: 50%; background-color: #ddd; color: black; border-radius: 10px 10px 10px 10px;}
+}
+@-moz-keyframes pop{
+    0% {opacity: 0; width: 25%; background-color: black; color: black; border-radius: 1px 1px 1px 1px;}
+    100% {opacity: 0.9; width: 50%; background-color: #ddd; color: black; border-radius: 10px 10px 10px 10px;}
+}
+@-webkit-keyframes pop{
+    0% {opacity: 0; width: 25%; background-color: black; color: black; border-radius: 1px 1px 1px 1px;}
+    100% {opacity: 0.9; width: 50%; background-color: #ddd; color: black; border-radius: 10px 10px 10px 10px;}
+}
+@keyframes anim{
+    0% {opacity: 0;}
+    100% {opacity: 0.8;}
+}
+@-moz-keyframes anim{
+    0% {opacity: 0;}
+    100% {opacity: 0.8;}
+}
+@-webkit-keyframes anim{
+    0% {opacity: 0;}
+    100% {opacity: 0.8;}
+}
+@keyframes slide{
+    0% {opacity: 0;}
+    100% {opacity: 100;}
+}
+
+/****************************************************************************************  Base  ********************************************************************************************/
+/*S'applique à tous les éléments*/
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+
+}
+/*Mise en place de la police, fichier téléchargé*/
+@font-face {
+  font-family: "MANIFESTO";
+  src: url('font/MANIFESTO.ttf');
+}
+body {
+  color:black;
+  background-color:white;
+  margin-bottom: 100px;
+}
+
+h1{
+  font-family: MANIFESTO, sans-serif;
+  opacity: 0.7;
+  font-size: 100px;
+}
+h2{
+  text-align: center;
+  color: tomato;
+  font-family: MANIFESTO, sans-serif;
+  font-size: 50px;
+}
+h3{
+  text-align: center;
+  color: tomato;
+  font-family: MANIFESTO, sans-serif;
+  font-size: 25px;
+}
+label{
+  color:white;
+}
+select{
+  width: 100%;
+  padding :12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+br {line-height:20px;}
+hr{margin-top: 30px; margin-bottom: 30px; color: grey;}
+a{color: tomato;}
+#serieOption1{
+  width: 49%;
+  margin: 5px;
+  padding: 8px;
+  float: left;
+  opacity: 1;
+
+}
+#serieOption2{
+  width: 49%;
+  margin: 5px;
+  padding: 8px;
+  float: right;
+}
+/********************************************************************************************************  Header  ****************************************************************************************/
+.pictureBackground{
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  display: block;
+  background-image:url(pictures/carBackground.jpg);
+  width: 100%;
+  height: 100%;
+  /* Safari */
+  -webkit-filter: blur(3px); /*Filtre de floutage de 3 pixels appliqué à l'image de fond */
+  /* Firefox */
+  -moz-filter: blur(3px);
+  /* Opera */
+  -o-filter: blur(3px);
+  /* Internet Explorer */
+  -ms-filter: blur(3px);
+  filter: blur(3px);
+}
+.header {
+  background: tomato;
+  min-width: 1100px;
+  height: 175px;
+  color: #efefef;
+}
+
+.header-fixed {
+  background: tomato;
+  font-size: 14px;
+  position: fixed;
+  line-height: 40px;
+  height: 40px;
+  text-indent: 20px;
+  width: 100%;
+}
+
+.siteTitle{
+  line-height: 200px;
+  min-width: 1100px;
+  text-align: center;
+  font-size: 28px;
+}
+
+/************************************************************************************  Content  ************************************************************************************/
+.ourPage{/* ATTENTIOn cette balise pose souvent problème */
+
+  z-index: 9999; /* Niveau "de placement" : avant-plan / arrière-plan, plus la valeur est élevé plus le plan est avancé*/
+}
+/* esae-in-out allows to put up a timer before the animation starts */
+
+.content {
+  animation: anim 2s ease-in-out 0s forwards; 
+  width: 80%;
+  max-width: 1200px;
+  min-width: 1100px;
+  background: #303030;
+  margin: 5px auto;
+  min-height: 500px;
+  padding: 40px;
+  color: white;
+  border:#000000 1px solid;
+  box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5);
+  border-radius: 0px 0px 10px 10px;
+  opacity: 0.8;
+}
+#valid{
+  background-color: tomato;
+  border-color: tomato;
+  color: white;
+  margin: 8px 0;
+  border-radius:4px;
+  cursor: pointer;
+  width: 100%;
+  box-shadow: 0 0 20px 0 rgba(0,0,0,0.2), 0 5px 5px rgba(0,0,0,0.24);
+  transition: 1s;
+}
+#valid:hover{
+  background-color: white;
+  color: tomato;
+  border: 1px solid tomato;
+  border-radius:4px;
+}
+
+/******************************************************************************** Barre de choix du type de service ****************************************************************************/
+.typeRentChoice{
+  animation: anim 2s ease-in-out 0s forwards;
+  background-color: #333;
+  overflow: hidden; /* cache le texte dépassant du compartiment*/
+  width: 80%;
+  max-width: 1200px;
+  min-width: 1100px;
+  margin: 10px auto;
+  padding: 5px;
+  border-radius: 10px 10px 0px 0px;
+  opacity: 0.9;
+  white-space: nowrap; /* évite le passage à la ligne automatique */
+}
+.a1,.a2 {
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none; /* enlève la déco text lors du passagedu curseur */
+    font-size: 17px;
+    opacity: 0.9; 
+    width: 25%; 
+    background-color: #ddd; 
+    border-radius: 3px 3px 3px 3px; 
+    transition: 2s; /*utiliser une transition au lieu d'une animation */
+}
+
+.a1:hover,.a2:hover { /* sélecteur permettant de modifier le composant au passage du curseur */
+    opacity: 0.9; 
+    width: 50%; 
+    background-color: #ddd; 
+    color: black; 
+    border-radius: 10px 10px 10px 10px;
+}
+.a1{
+  float: left;
+}
+.a2{
+  float: right;
+}
+/******************************************************************************************** Menu ************************************************************************************************/
+.menu {
+    float: left;
+    position: absolute;
+    width: 2%;
+    min-width: 40px;
+    opacity: 0.9;
+    animation: anim 2s ease-in-out 0s forwards;
+    transition: width 1s ease 0.15s; /* transition =/= animation, une transition permet par exemple de changer une couleur en augmentant rgb pixel par pixel et non d'un coup,
+    une transition s'accompagne d'un :hover pour spécifier le moment où la transition aura lieu */
+
+}
+.menu:hover{
+    width: 180px; /* la transition s'applique à tous les elts du compartiment, ici seulement "width" */
+}
+.menu a {
+    background-color: tomato; 
+    color: white; 
+    display: block; 
+    padding: 8px; 
+    text-decoration: none; 
+    white-space: nowrap;
+    overflow: hidden;
+    transition: 2s;
+}
+
+.menu a:hover {
+    background-color: #ccc; 
+}
+.menu a.active {
+    background-color: #FF4500; 
+    color: white;
+}
+
+/***************************************************************************************************** Connexion ********************************************************************************************/
+#contain{ /* Conteneur de la page connexion contenant les inputs de login/pass */
+  width: 600px;
+  margin:0 auto;
+  margin-top: 0%;
+}
+#remember{
+  width: 5%;
+}
+/**** -Page- Résultat du filtrage ****/
+/* Parent de .compatments*/
+#resultContainer{
+  animation: anim 2s ease-in-out 0s forwards; 
+  width: 80%;
+  max-width: 1200px;
+  min-width: 1100px;
+  background: #303030;
+  margin: 5px auto;
+  min-height: 400px;
+  padding: 40px;
+  color: white;
+}
+/*Fils de #resultContainer*/
+.compartments{
+  width: 95%;
+  max-width: 1200px;
+  background: #C0C0C0;
+  margin: 5px auto;
+  min-height: 200px;
+  padding: 20px;
+  color: black;
+  box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5);
+  border: solid black 2px;
+  margin-top: 30px;
+ /* display: flex; /* active le display flex pour la disposition des éléments DANS le conteneur*/
+/*  justify-content: space-between; /* ici, on chosit la disposition en ligne, avec espace latéraux gauche/droite */
+  position: relative;
+}
+/*****************************************************Pour le link vers description détaillée dans rentalResult ***************************************************************/
+.getProfil{
+  position: absolute; /* cette postion liée à la position relative du parent permet d'utiliser top/botton/right/left en lien avec celui-ci*/
+  display: inline-block;
+  background-color: tomato;
+  border: 1px solid tomato;
+  font-size: 14px;
+  color: white;
+  padding: 7px 21px;
+  border-radius:4px;
+  cursor: pointer;
+  box-shadow: 0 0 20px 0 rgba(0,0,0,0.2), 0 5px 5px rgba(0,0,0,0.24);
+  transition: 1s;
+  right: 2%;
+  bottom: 10%;
+}
+.getProfil:hover{
+  background-color: white;
+  color: tomato;
+  border: 1px solid tomato;
+  border-radius:4px;
+}
+
+.descriptionAnnounce{
+  position: absolute;
+  right: 50%;
+  bottom: 15%;
+}
+.descriptionAnnounceBis{
+  right: 20%;
+  bottom: 10%;
+}
+.motImportant{
+  color: red;		
+  font-weight: bold;
+}
+.userProfilAccess{
+  position: absolute;
+  right: 2%;
+  bottom: 85%;
+}
+
+/* Dépôt, compte achat fixé à droite */
+#shoppingCart{
+  width: 20%;
+  max-width: 200px;
+  background: black;
+  padding: 20px;
+  min-height: 200px;
+  margin-right: 40px;
+  position: fixed;
+  top: 18%; /* pour le placement, en position:fixed, il se met à gauche malgré le float...;*/
+  left: 89%;
+  border-radius: 5px 5px 5px 5px;
+  display: none;
+}
+
+#wallet{
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  position: fixed;
+  top: 12.8%;
+  left: 97.3%;
+  background-image: url(pictures/wallet.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: tomato;
+  border:none;
+  box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); 
+  transition: 1s;
+}
+#wallet:hover{
+  background-color: white;
+}
+/***************************************************************************************************************** Register Page *********************************************************************v***/
+#registerPage{
+  animation: anim 2s ease-in-out 0s forwards; 
+  width: 80%;
+  max-width: 1600px;
+  background: #303030;
+  margin: 5px auto;
+  min-height: 800px;
+  padding: 40px;
+  color: white;
+}
+/***********************************************************************************************************DetailedAnnounce Page *************************************************************/
+.detailedPart{
+  animation: anim 2s ease-in-out 0s forwards;
+  width: 80%;
+  max-width: 1400px;
+  background: #303030;
+  margin: 5px auto;
+  min-height: 800px;
+  padding: 40px;
+  color: white;
+}
+.paraphUser{
+  font-family:"times new roman", times, serif;
+  font-size: 20px;
+  line-height: 150%;
+}
+/***********************************************************************************************************Etoiles****************************************************************************/
+.rating{
+  margin-bottom: 70px;
+  margin-right: 42%;
+}
+
+.rating a{
+  color: tomato;
+  text-decoration: none;
+  font-size: 3em;
+  transition: color .4s;
+  float: right;
+}
+.rating a:hover,
+.rating a:focus,
+.rating a:hover ~ a,
+.rating a:focus ~ a {
+  color: yellow;
+  cursor: pointer;
+}
+.notation{
+  color: yellow;
+  text-decoration: none;
+  font-size: 2em;
+}
+/***********************************************************************************************************Admin****************************************************************************/
+.deleter{
+  position: absolute; /* cette postion liée à la position relative du parent permet d'utiliser top/botton/right/left en lien avec celui-ci*/
+  display: inline-block;
+  background-color: tomato;
+  border: 1px solid tomato;
+  font-size: 14px;
+  color: white;
+  padding: 7px 21px;
+  border-radius:4px;
+  cursor: pointer;
+  box-shadow: 0 0 20px 0 rgba(0,0,0,0.2), 0 5px 5px rgba(0,0,0,0.24);
+  transition: 1s;
+  right: 17%;
+  bottom: 10%;
+}
+.deleter:hover{
+  background-color: white;
+  color: tomato;
+  border: 1px solid tomato;
+  border-radius:4px;
+}
+#adminPart{
+  animation: anim 2s ease-in-out 0s forwards; 
+  width: 80%;
+  max-width: 1400px;
+  background: white;
+  margin: 5px auto;
+  min-height: 1000px;
+  padding: 40px;
+  color: white;
+  position: relative;
+}
+#statistic, #statistic2{
+  position: absolute;
+  border: 1px solid black;
+}
+#statistic, #statistic2{
+  top: 50%;
+}
+#statistic2{
+  left:70%; 
+}
+/*************************************************************************************************SLider****************************************************************/
+.rightB{
+  float: right;
+  min-width: 40px;
+  min-height: 40px;
+  color: white;
+  background-color: tomato;
+  border-radius: 50%;
+  border-color: tomato;
+  transition: 0.4s;
+ }
+.leftB{
+  min-width: 40px;
+  min-height: 40px;
+  color: white;
+  background-color: tomato;
+  border-radius: 50%;
+  border-color: tomato;
+  transition: 0.4s;
+}
+.leftB:hover, .rightB:hover{
+  background-color: white;
+  color: tomato;
+}
+.mySlides {
+  animation: slide 1s ease-in-out 0s forwards; 
+  display:none;
+  box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); 
+  width: 70%; 
+  height: 500px;
+  border-radius: 6px;
+  margin-left: 15%;
+}
+/******************Estimate*************/
+.date{
+  position: absolute;
+  left: 90%;
+  bottom: 90%;
+}
+/***********************************************************************************************************transaction Page *************************************************************/
+#transact_info{
+  animation: anim 1s ease-in-out 0s forwards; 
+  width: 70%;
+  max-width: 1200px;
+  background: #303030;
+  margin: 5px auto;
+  min-height: 600px;
+  padding: 40px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+}
