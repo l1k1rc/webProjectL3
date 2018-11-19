@@ -302,9 +302,9 @@
 		/* INDICE $I dans la boucle  :::::  0 = path, 1 = idrent, 2 = namerent, 3 = brandrent, 4 = gearboxrent, 5 = typerent, 6 = nbr_seatrent, 7 = pricerent, 8 = emailu  */
 
 		$tabName=array('','','','Marque : ', 'Transmission : ', 'Catégorie : ', 'Nombre de sièges : ',' ' );
-		$result=pg_query("SELECT /*path_photofiles,*/rent.idrent,namerent,brandrent,gearboxrent,typerent,nbr_seatrent,pricerent FROM rent /*INNER JOIN files ON rent.idrent=files.idrent*/ WHERE emailu='".$id."'") or die('Aucun résultat.');
+		$result=pg_query("SELECT path_photofiles,rent.idrent,namerent,brandrent,gearboxrent,typerent,nbr_seatrent,pricerent FROM rent INNER JOIN files ON rent.idrent=files.idrent WHERE emailu='".$id."'") or die('Aucun résultat.');
 		while ($line = pg_fetch_array($result,null,PGSQL_ASSOC)) {
-			$i=1; // Changer la partie IMAGE via la table 
+			$i=0; // Changer la partie IMAGE via la table 
 			$tab.="\t<div class='compartments'>";
 			//  <img src='".$picturesRent[1]."' style='box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'>";
 			$tab.="<p class='descriptionAnnounce'> ";
@@ -323,8 +323,8 @@
 				$i++;
 			}
 			$tab.="</p>"; // se référer au commentaire en haut pour les indices
-			$tab.="<img src='' style='box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'>"; //".$pseudo[0]." enlevé de src
-			//$tab.="<input href='' class ='getProfil' style='margin-bottom : 30px;'>Supprimer annonce</input>";
+			$tab.="<img src='".$pseudo[0]."' style='margin-right : 1%; box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'>"; //".$pseudo[0]." enlevé de src
+			
 			$tab.="<input type='button' value='Supprimer annonce' onclick='window.location.href=''' class='getProfil' style='margin-bottom : 50px;'>";
 			$tab.= "<input type='button' value='Consulter annonce' onclick='window.location.href='detailedAnnounce.php?psd=".$pseudo[1]."' class='getProfil'style='padding-left : 26px;'>";
 			$tab.="\t</div>\n";
@@ -359,7 +359,7 @@
 
       $req = pg_query("SELECT profilimgu FROM users WHERE emailu='".$emailvisit."'") or die('Échec de la requête : ' . pg_last_error());
       $array[6] = pg_fetch_array($req, null, PGSQL_ASSOC);
-      if ($array[6]['profilimgu'] == "") $array[6]['profilimgu'] = "./pictures/photo_profil/default.png";
+      if ($array[6]['profilimgu'] == "") $array[6]['profilimgu'] = "./profilImg/default.png";
       
       pg_close($dbconn);
       return $array;
