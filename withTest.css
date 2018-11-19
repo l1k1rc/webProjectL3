@@ -306,6 +306,21 @@ a{color: tomato;}
   right: 2%;
   bottom: 10%;
 }
+
+.getProfil2{
+  background-color: tomato;
+  border: 1px solid tomato;
+  text-align: center;
+  font-size: 14px;
+  color: white;
+  padding: 7px 21px;
+  border-radius:4px;
+  cursor: pointer;
+  box-shadow: 0 0 20px 0 rgba(0,0,0,0.2), 0 5px 5px rgba(0,0,0,0.24);
+  transition: 1s;
+  margin-top: 15px;
+}
+
 .getProfil:hover{
   background-color: white;
   color: tomato;

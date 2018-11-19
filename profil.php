@@ -32,34 +32,39 @@
               }
               else{
                 displayMenu();
+                echo '<body onLoad="alert(\'Vous devez être connecté pour accéder à cette page\')">';
+                echo '<meta http-equiv="refresh" content="0;URL=connection.php">';
               }
             ?>
+             <div class="typeRentChoice">
+                <a href='location.php'" class="a1">Proposer une location</a>
+                <a href="covoiturage.php" class="a2">Proposer un covoiturage</a>
+            </div>
             <div id="resultContainer">
-                    <input type="button" name="location" value="Louer une voiture" onclick="window.location.href='location.php'" class="button2">
-                    <input type="button" name="covoiturage" value="Proposer un covoiturage" onclick="window.location.href='covoiturage.php'" class="button1">
                 <?php
+                //Profil infos collect
                 $array_profil = profilDisplay($_SESSION['login']);
-                
                 echo "<p style='font-family: MANIFESTO, sans-serif; font-size: 40px; text-align: center; color: tomato;'>- Profil -</p>
-                <center><img src='pictures/risitas.jpg' style='  box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 150px; height: 150px; margin-left:auto; margin-right:auto;''></center>
+                <center><img src=".$array_profil[6]['profilimgu']." style='  box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 150px; height: 150px; margin-left:auto; margin-right:auto;'></center>
                 <div class='compartments'>
-                	  <p style='font-family: MANIFESTO, sans-serif; font-size: 20px; text-align: center; color: tomato;'>Details du profil</p>
-                    <p class='descriptionAnnounceBis' style='top: 30%;'><b class='motImportant' >Email :</b> ".$array_profil[0]['emailu']."<br /><b class='motImportant' >Nom :</b> ".$array_profil[1]['nameu']." <br /><b class='motImportant' >Prenom :</b> ".$array_profil[2]['surnameu']." <br /> <b class='motImportant' >Age :</b> ".$array_profil[3]['ageu']." <br /><b class='motImportant' >Genre :</b> ".$array_profil[4]." <br /><b class='motImportant' >Téléphone :</b> ".$array_profil[5]['phoneu']."</p>
-                </div>"
+                	  <p style='font-family: MANIFESTO, sans-serif; font-size: 20px; text-align: center; color: tomato; margin-bottom: 15px;'>Details du profil</p>
+                    <p class='descriptionAnnounceBis' style='top: 30%;'><b class='motImportant' >Email :</b> ".$array_profil[0]['emailu']."<br /><b class='motImportant' >Nom :</b> ".$array_profil[1]['nameu']." <br /><b class='motImportant' >Prenom :</b> ".$array_profil[2]['surnameu']." <br /> <b class='motImportant' >Age :</b> ".$array_profil[3]['ageu']." <br /><b class='motImportant' >Genre :</b> ".$array_profil[4]['gender']." <br /><b class='motImportant' >Téléphone :</b> ".$array_profil[5]['phoneu']."</p>"
                 ?>
-         
-                <div class="compartments">
-                	  <p style="font-family: MANIFESTO, sans-serif; font-size: 20px; text-align: center; color: tomato;">Historique des Evenements</p>
-                    <p class="descriptionAnnounceBis">-Covoiturage avec salt bae<br/>-Location voiture téléguidée</p>
+                <input type="button" value="Editer le profil" onclick="window.location.href='profilEdit.php'" class="getProfil">
                 </div>
                 <div class="compartments">
-                	  <p style="font-family: MANIFESTO, sans-serif; font-size: 20px; text-align: center; color: tomato;">Information du compte</p>
-                   		<p class="descriptionAnnounceBis"><b class="motImportant" >Solde:</b> over 9 000</p>
+                    <p style="font-family: MANIFESTO, sans-serif; font-size: 20px; text-align: center; color: tomato;">Mes annonces</p>
+                    <?php 
+                        echo profilUserRentDisplay($_SESSION['login']);
+                    ?>
+                </div>
+                <div class="compartments">
+                	  <p style="font-family: MANIFESTO, sans-serif; font-size: 20px; text-align: center; color: tomato;">Mes covoiturages</p>
+                </div>
+                <div class="compartments">
+                	  <p style="font-family: MANIFESTO, sans-serif; font-size: 20px; text-align: center; color: tomato;">Solde du compte</p>
                     <input type="button" value="Recharger le compte" onclick="window.location.href='../index.php'" class="getProfil">
                 </div>       
-                <div class="compartments">
-                    <p style="font-family: MANIFESTO, sans-serif; font-size: 20px; text-align: center; color: tomato;">Messages Prives</p>
-                </div>
             </div>
     </div>
 </div>
