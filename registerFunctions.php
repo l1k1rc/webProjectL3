@@ -49,14 +49,30 @@
 
 
 		if ($k!=2) {
-			move_uploaded_file($_FILES['photo']['tmp_name'], $path);
+			if ($_FILES['photo']['size']<=5000000) {
+				$infosfichier = pathinfo($_FILES['photo']['name']);
+				$extensionsupload = $infosfichier['extension'];
+				$extension_allowed = array('jpg','jpeg','png');
+				if (in_array($extensionsupload, $extension_allowed)) {
+					move_uploaded_file($_FILES['photo']['tmp_name'], $path);
 
-			$requete1 = "INSERT INTO users VALUES('$email', '$name', '$surname', '$age', '$sexe', '$phone', '$password_hash', '$path')";
-			$resultat = pg_query($requete1) or die('ERREUR SQL : '. $requete1 . 	pg_last_error());
-			$requete2 = "INSERT INTO warehouse (balanceWh, date_exchangeWh, emailU) VALUES ('20', '$date', '$email')";
-			$resultat2 = pg_query($requete2) or die('ERREUR SQL : '. $requete2 .    pg_last_error());
-			echo '<body onLoad="alert(\'Enregistrement de votre compte effectué\')">';
-	    	echo '<meta http-equiv="refresh" content="0;URL=register.php">';
+					$requete1 = "INSERT INTO users VALUES('$email', '$name', '$surname', '$age', '$sexe', '$phone', '$password_hash', '$path')";
+					$resultat = pg_query($requete1) or die('ERREUR SQL : '. $requete1 . 	pg_last_error());
+					$requete2 = "INSERT INTO warehouse (balanceWh, date_exchangeWh, emailU) VALUES ('20', '$date', '$email')";
+					$resultat2 = pg_query($requete2) or die('ERREUR SQL : '. $requete2 .    pg_last_error());
+					echo '<body onLoad="alert(\'Enregistrement de votre compte effectué\')">';
+			    	echo '<meta http-equiv="refresh" content="0;URL=profil.php">';
+				}
+				else{
+					echo '<body onLoad="alert(\'Mauvaise extension de photo\')">';
+			    	echo '<meta http-equiv="refresh" content="0;URL=register.php">';
+				}
+			}
+			else{
+				echo '<body onLoad="alert(\'Taille de la photo trop volumineuse\')">';
+			    echo '<meta http-equiv="refresh" content="0;URL=register.php">';
+			}
+			
 
 		}
 
@@ -85,12 +101,6 @@
 		$path2 = 'pictures/photo_location/'.basename($_FILES['image2']['name']);
 		$path3 = 'pictures/photo_location/'.basename($_FILES['image3']['name']);
 		$date = date("Y-m-d");
-		
-
-
-
-
-		/* Problemes ici mon choupinou jusqu'au if.
 
 
 		$requet = "SELECT emailU FROM rent WHERE typeRent='$type' AND brandRent='$marque' AND kilometerRent='$kilometer' AND nameRent='$title' AND serieRent='$modele'";
@@ -109,7 +119,6 @@
 		    echo '<meta http-equiv="refresh" content="0;URL=location.php">';
 		}
 
-		*/
 		else{
 			
 			if (($_FILES['image']['size']<=5000000) && ($_FILES['image1']['size']<=5000000) && ($_FILES['image2']['size']<=5000000) && ($_FILES['image3']['size']<=5000000)) {

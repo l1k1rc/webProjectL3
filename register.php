@@ -74,7 +74,7 @@ ini_set("display_errors",0);error_reporting(0);?>
                     <br /><label for="password">Votre mot de passe :</label><br />
                     <input type="password" name="password"><br />
                     <br />
-                    <label>Votre photo de profil:</label>
+                    <label>Votre photo de profil (jpg, jpeg, png) :</label>
                     <input type="file" accept="image/*" onchange="loadFile(event)" name="photo" id="photo" required="" style="margin-bottom: 1cm">
                     <br />
                     <img id="output" style="max-width: 180px; margin-bottom: 1cm; margin-left: 5cm;" alt=""> 
