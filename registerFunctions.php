@@ -89,32 +89,95 @@
 
 
 
-		move_uploaded_file($_FILES['image']['tmp_name'], $path);
-		move_uploaded_file($_FILES['image1']['tmp_name'], $path1);
-		move_uploaded_file($_FILES['image2']['tmp_name'], $path2);
-		move_uploaded_file($_FILES['image3']['tmp_name'], $path3);
-		$requete3 = "INSERT INTO rent(typeRent, kilometerRent, conditionRent, nameRent, serieRent, brandRent, availabilityRent, priceRent, horsePowerRent, gearboxRent, nbr_seatRent,fuel_typeRent, nbr_doorRent, descriptionRent, emailU) VALUES ('$type','$kilometer','$couleur','$title','$modele','$marque','$duree','$price','$horseP','$gearbox','$seat','$fuel','$door','$commentary','$emailloc')";
-		$result = pg_query($requete3) or die('ERREUR SQL : '. $requete3 . 	pg_last_error());
-		$requete4 = "SELECT idRent FROM rent WHERE typeRent='$type' AND brandRent='$marque' AND kilometerRent='$kilometer' AND nameRent='$title' AND serieRent='$modele'";
-		$result1 = pg_query($requete4) or die('ERREUR SQL : '. $requete4 . 	pg_last_error());
-		$idrent=0;
-		while ($l = pg_fetch_array($result1,null,PGSQL_ASSOC)) {
+
+		/* Problemes ici mon choupinou jusqu'au if.
+
+
+		$requet = "SELECT emailU FROM rent WHERE typeRent='$type' AND brandRent='$marque' AND kilometerRent='$kilometer' AND nameRent='$title' AND serieRent='$modele'";
+		$resultat = pg_query($requet) or die('ERREUR SQL : '. $requet . 	pg_last_error());
+		$emailuti='';
+		while ($l = pg_fetch_array($resultat,null,PGSQL_ASSOC)) {
 			foreach ($l as $val) {
-				$idrent=$val;
+				$emailuti=$val;
 			}
-		}  
-		$requete5 = "INSERT INTO files(path_photofiles, date_createfiles, idRent) VALUES ('$path','$date','$idrent')";
-		$result2 = pg_query($requete5) or die('ERREUR SQL : '. $requete5 . 	pg_last_error());
+		}
+		$val1 = (string) $emailloc;
+		$val2 = (string) $emailuti;
 
-		$requete6 = "INSERT INTO file2(path2photofiles, idRent) VALUES ('$path1','$idrent')";
-		$result3 = pg_query($requete6) or die('ERREUR SQL : '. $requete6 . 	pg_last_error());
-		$requete7 = "INSERT INTO file2(path2photofiles, idRent) VALUES ('$path2','$idrent')";
-		$result4 = pg_query($requete7) or die('ERREUR SQL : '. $requete7 . 	pg_last_error());
-		$requete8 = "INSERT INTO file2(path2photofiles, idRent) VALUES ('$path3','$idrent')";
-		$result5 = pg_query($requete8) or die('ERREUR SQL : '. $requete8 . 	pg_last_error());
-	    echo '<body onLoad="alert(\'Enregistrement de la location effectué\')">';
-	    echo '<meta http-equiv="refresh" content="0;URL=rentalResult.php">';
+		if ($val1 === $val2) {
+			echo '<body onLoad="alert(\'Vous avez déjà postez une annonce du même type !\')">';
+		    echo '<meta http-equiv="refresh" content="0;URL=location.php">';
+		}
 
+		*/
+		else{
+			
+			if (($_FILES['image']['size']<=5000000) && ($_FILES['image1']['size']<=5000000) && ($_FILES['image2']['size']<=5000000) && ($_FILES['image3']['size']<=5000000)) {
+				$infofichier = pathinfo($_FILES['image']['name']);
+				$infofichier1 = pathinfo($_FILES['image1']['name']);
+				$infofichier2 = pathinfo($_FILES['image2']['name']);
+				$infofichier3 = pathinfo($_FILES['image3']['name']);
+				$extensionsupload = $infofichier['extension'];
+				$extensionsupload1 = $infofichier1['extension'];
+				$extensionsupload2 = $infofichier2['extension'];
+				$extensionsupload3 = $infofichier3['extension'];
+				$extension_allowed = array('jpg','jpeg','png');
+				if (in_array($extensionsupload, $extension_allowed)) {
+					if (in_array($extensionsupload1, $extension_allowed)) {
+						if (in_array($extensionsupload2, $extension_allowed)) {
+							if (in_array($extensionsupload3, $extension_allowed)) {
+								move_uploaded_file($_FILES['image']['tmp_name'], $path);
+								move_uploaded_file($_FILES['image1']['tmp_name'], $path1);
+								move_uploaded_file($_FILES['image2']['tmp_name'], $path2);
+								move_uploaded_file($_FILES['image3']['tmp_name'], $path3);
+								$requete3 = "INSERT INTO rent(typeRent, kilometerRent, conditionRent, nameRent, serieRent, brandRent, availabilityRent, priceRent, horsePowerRent, gearboxRent, nbr_seatRent,fuel_typeRent, nbr_doorRent, descriptionRent, emailU) VALUES ('$type','$kilometer','$couleur','$title','$modele','$marque','$duree','$price','$horseP','$gearbox','$seat','$fuel','$door','$commentary','$emailloc')";
+								$result = pg_query($requete3) or die('ERREUR SQL : '. $requete3 . 	pg_last_error());
+								$requete4 = "SELECT idRent FROM rent WHERE typeRent='$type' AND brandRent='$marque' AND kilometerRent='$kilometer' AND nameRent='$title' AND serieRent='$modele'";
+								$result1 = pg_query($requete4) or die('ERREUR SQL : '. $requete4 . 	pg_last_error());
+								$idrent=0;
+								while ($l = pg_fetch_array($result1,null,PGSQL_ASSOC)) {
+									foreach ($l as $val) {
+										$idrent=$val;
+									}
+								}  
+								$requete5 = "INSERT INTO files(path_photofiles, date_createfiles, idRent) VALUES ('$path','$date','$idrent')";
+								$result2 = pg_query($requete5) or die('ERREUR SQL : '. $requete5 . 	pg_last_error());
+
+								$requete6 = "INSERT INTO file2(path2photofiles, idRent) VALUES ('$path1','$idrent')";
+								$result3 = pg_query($requete6) or die('ERREUR SQL : '. $requete6 . 	pg_last_error());
+								$requete7 = "INSERT INTO file2(path2photofiles, idRent) VALUES ('$path2','$idrent')";
+								$result4 = pg_query($requete7) or die('ERREUR SQL : '. $requete7 . 	pg_last_error());
+								$requete8 = "INSERT INTO file2(path2photofiles, idRent) VALUES ('$path3','$idrent')";
+								$result5 = pg_query($requete8) or die('ERREUR SQL : '. $requete8 . 	pg_last_error());
+		    					echo '<body onLoad="alert(\'Enregistrement de la location effectué\')">';
+		    					echo '<meta http-equiv="refresh" content="0;URL=rentalResult.php">';
+							}
+							else {
+								echo '<body onLoad="alert(\'Erreur extension image 3\')">';
+		    					echo '<meta http-equiv="refresh" content="0;URL=location.php">';
+							}
+						}
+						else {
+							echo '<body onLoad="alert(\'Erreur extension image 2\')">';
+			    			echo '<meta http-equiv="refresh" content="0;URL=location.php">';
+						}
+					}
+					else {
+						echo '<body onLoad="alert(\'Erreur extension image 1\')">';
+			    		echo '<meta http-equiv="refresh" content="0;URL=location.php">';
+					}			
+				}
+				else {
+					echo '<body onLoad="alert(\'Erreur extension image principale\')">';
+			    	echo '<meta http-equiv="refresh" content="0;URL=location.php">';
+				}
+			}
+			else {
+				echo '<body onLoad="alert(\'Erreur images trop volumineuses\')">';
+			    echo '<meta http-equiv="refresh" content="0;URL=location.php">';
+			}
+		}
+		
 
 	}
 
