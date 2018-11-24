@@ -55,29 +55,29 @@ ini_set("display_errors",0);error_reporting(0);?>
             ?>
             <div id="registerPage">
             	<form enctype="multipart/form-data" method="post" action="registerFunctions.php"> 
-            		<br /><label for="name">Votre nom :</label><br />
+            		<br /><label id="name">Votre nom :</label><br />
             		<input type="text" name="name">
-            		<br /><label for="surname">Votre prénom :</label><br />
+            		<br /><label id="surname">Votre prénom :</label><br />
             		<input type="text" name="surname">
-            		<br /><label for="age">Votre âge :</label><br />
+            		<br /><label id="age">Votre âge :</label><br />
             		<input type="number" name="age">
-            		<br /><label for="mail">Votre email :</label><br />
+            		<br /><label id="mail">Votre email :</label><br />
             		<input type="email" name="mail">
-            		<br /><label for="sexe">Votre sexe :</label><br />
-            		<select name="sexe" id="sexe">
+            		<br /><label id="sexe">Votre sexe :</label><br />
+            		<select name="sexe" class="sexe">
                            <option value="FALSE">Femme</option>
                            <option value="TRUE">Homme</option>
                            <option value="autre">Hélicoptère de combat équipé de missile anti-aérien et d'hélices bilatérales</option>
                     </select>
-                    <br /><label for="phone">Votre n°- de téléphone :</label><br />
+                    <br /><label id="phone">Votre n°- de téléphone :</label><br />
                     <input type="tel" name="phone">
-                    <br /><label for="password">Votre mot de passe :</label><br />
+                    <br /><label id="password">Votre mot de passe :</label><br />
                     <input type="password" name="password"><br />
                     <br />
                     <label>Votre photo de profil (jpg, jpeg, png) :</label>
                     <input type="file" accept="image/*" onchange="loadFile(event)" name="photo" id="photo" required="" style="margin-bottom: 1cm">
                     <br />
-                    <img id="output" style="max-width: 180px; margin-bottom: 1cm; margin-left: 5cm;" alt=""> 
+                    <img id="output" style="max-width: 180px; margin-bottom: 1cm; margin-left: 5cm;" alt="" src="aaa"> 
                     <br />
                     <script>var loadFile = function(event) {
                         var reader = new FileReader();

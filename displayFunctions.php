@@ -116,18 +116,18 @@
     function displayMenu(){
       if(empty($_SESSION['login'])){
       	echo '<div class="menu">
-                <a href="index.php" class="active"><img src="pictures/home.png">&nbsp;&nbsp;&nbsp;Home</a>
-                <a href="register.php"><img src="pictures/inscrip.png">&nbsp;&nbsp;&nbsp;S\'inscrire</a>
-                <a href="connection.php"><img src="pictures/connect.png">&nbsp;&nbsp;&nbsp;Se connecter</a>
+                <a href="index.php" class="active"><img src="pictures/home.png" alt="">&nbsp;&nbsp;&nbsp;Home</a>
+                <a href="register.php"><img src="pictures/inscrip.png" alt="">&nbsp;&nbsp;&nbsp;S\'inscrire</a>
+                <a href="connection.php"><img src="pictures/connect.png" alt="">&nbsp;&nbsp;&nbsp;Se connecter</a>
               </div>';
       }
     }
     function displayConnectedMenu(){
     	echo '<div class="menu">
-              <a href="index.php" class="active"><img src="pictures/home.png">&nbsp;&nbsp;&nbsp;Home</a>
-              <a href="profil.php"><img src="pictures/connect.png">&nbsp;&nbsp;&nbsp;Profil</a>
-              <a href="#"><img src="pictures/historical.png">&nbsp;&nbsp;&nbsp;Historique</a>
-              <a href="logout.php"><img src="pictures/logout.png">&nbsp;&nbsp;&nbsp;Logout</a>
+              <a href="index.php" class="active"><img src="pictures/home.png" alt="">&nbsp;&nbsp;&nbsp;Home</a>
+              <a href="profil.php"><img src="pictures/connect.png" alt="">&nbsp;&nbsp;&nbsp;Profil</a>
+              <a href="#"><img src="pictures/historical.png" alt="">&nbsp;&nbsp;&nbsp;Historique</a>
+              <a href="logout.php"><img src="pictures/logout.png" alt="">&nbsp;&nbsp;&nbsp;Logout</a>
             </div>';
     }
     /* A finir avec la BDD stockage, envoie, stockage long-terme ... */
