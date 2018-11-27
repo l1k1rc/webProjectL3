@@ -65,9 +65,8 @@ ini_set("display_errors",0);error_reporting(0);?>
             		<input type="email" name="mail">
             		<br /><label id="sexe">Votre sexe :</label><br />
             		<select name="sexe" class="sexe">
-                           <option value="FALSE">Femme</option>
-                           <option value="TRUE">Homme</option>
-                           <option value="autre">Hélicoptère de combat équipé de missile anti-aérien et d'hélices bilatérales</option>
+                           <option value="femme">Femme</option>
+                           <option value="homme">Homme</option>
                     </select>
                     <br /><label id="phone">Votre n°- de téléphone :</label><br />
                     <input type="tel" name="phone">

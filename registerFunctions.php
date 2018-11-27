@@ -96,6 +96,7 @@
 		$duree = $_POST['duree']." semaines";
 		$price = $_POST['prix'];
 		$commentary = $_POST['commentaryArea'];
+		$possibility = "TRUE";
 		$path = 'pictures/photo_location/'.basename($_FILES['image']['name']);
 		$path1 = 'pictures/photo_location/'.basename($_FILES['image1']['name']);
 		$path2 = 'pictures/photo_location/'.basename($_FILES['image2']['name']);
@@ -111,8 +112,8 @@
 				$emailuti=$val;
 			}
 		}
-		$val1 = (string) $emailloc;
-		$val2 = (string) $emailuti;
+		$val1 = $emailloc;
+		$val2 = $emailuti;
 
 		if ($val1 === $val2) {
 			echo '<body onLoad="alert(\'Vous avez déjà postez une annonce du même type !\')">';
@@ -139,7 +140,7 @@
 								move_uploaded_file($_FILES['image1']['tmp_name'], $path1);
 								move_uploaded_file($_FILES['image2']['tmp_name'], $path2);
 								move_uploaded_file($_FILES['image3']['tmp_name'], $path3);
-								$requete3 = "INSERT INTO rent(typeRent, kilometerRent, conditionRent, nameRent, serieRent, brandRent, availabilityRent, priceRent, horsePowerRent, gearboxRent, nbr_seatRent,fuel_typeRent, nbr_doorRent, descriptionRent, emailU) VALUES ('$type','$kilometer','$couleur','$title','$modele','$marque','$duree','$price','$horseP','$gearbox','$seat','$fuel','$door','$commentary','$emailloc')";
+								$requete3 = "INSERT INTO rent(typeRent, kilometerRent, conditionRent, nameRent, serieRent, brandRent, availabilityRent, priceRent, horsePowerRent, possibilityRent, gearboxRent, nbr_seatRent,fuel_typeRent, nbr_doorRent, descriptionRent, emailU) VALUES ('$type','$kilometer','$couleur','$title','$modele','$marque','$duree','$price','$horseP', '$possibility', '$gearbox','$seat','$fuel','$door','$commentary','$emailloc')";
 								$result = pg_query($requete3) or die('ERREUR SQL : '. $requete3 . 	pg_last_error());
 								$requete4 = "SELECT idRent FROM rent WHERE typeRent='$type' AND brandRent='$marque' AND kilometerRent='$kilometer' AND nameRent='$title' AND serieRent='$modele'";
 								$result1 = pg_query($requete4) or die('ERREUR SQL : '. $requete4 . 	pg_last_error());
