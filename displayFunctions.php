@@ -211,7 +211,7 @@
         $db=connectionDB();
 
         //recherche si destinataire est bien enregistré dans la base de donnée (présent dans la table users)
-       $req1=pg_query("SELECT dstwhisp FROM whisper INNER JOIN users ON users.emailu='".$_POST['dest']."'") or die('Échec de la requête : ' . pg_last_error());
+       $req1=pg_query("SELECT emailu FROM  users  WHERE emailu='".$_POST['dest']."'") or die('Échec de la requête : ' . pg_last_error());
 
         while ($l1 = pg_fetch_array($req1,null,PGSQL_ASSOC)) {
             foreach ($l1 as $val1) {
