@@ -78,6 +78,8 @@ ini_set("display_errors",0);error_reporting(0);?>
                     <br />
                     <img id="output" style="max-width: 180px; margin-bottom: 1cm; margin-left: 5cm;" alt="" src="aaa"> 
                     <br />
+                    <!script that show a quick display of the picture that you select in the file upload>
+
                     <script>var loadFile = function(event) {
                         var reader = new FileReader();
                         reader.onload = function()

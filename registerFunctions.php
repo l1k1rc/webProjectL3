@@ -5,9 +5,9 @@
         echo '<meta http-equiv="refresh" content="0;URL=register.php">';
     }
 
-
+    // for the client register
 	if(isset($_POST['validRegister']) ){
-		// ici on se connecte à la db de guillaume donc modifier la dbname le user et la password pour vous co chez vous
+		// we take all the informations from the forms
 		$dbconn = connectionDB();
 	    $path = 'pictures/photo_profil/'.basename($_FILES['photo']['name']);
 		$name = $_POST['name'];
@@ -20,7 +20,7 @@
 		$password_hash = crypt($password, 'rl');
 
 		$date = date("Y-m-d");
-
+		// we take all the emails that are in the database and we ckeck if the email that the client put in the form already exist in the database
 		$query = 'SELECT emailU FROM users';
 		$result = pg_query($query) or die('Échec de la requête : ' . pg_last_error());
 		$tab = array();
@@ -34,7 +34,7 @@
     		}
  
 		}
-		
+		//if the email existing in the database a popup alert the client the email exist
 		while(($k==0) && ($j<$i)){
 			if (strcmp($email, $tab[$j])==0) {
 				$k=2;
@@ -47,7 +47,7 @@
 			}
 		}
 
-
+		//else we insert into the database the informations about the client and put his profil picture into the database too
 		if ($k!=2) {
 			if ($_FILES['photo']['size']<=5000000) {
 				$infosfichier = pathinfo($_FILES['photo']['name']);
@@ -60,6 +60,8 @@
 					$resultat = pg_query($requete1) or die('ERREUR SQL : '. $requete1 . 	pg_last_error());
 					$requete2 = "INSERT INTO warehouse (balanceWh, date_exchangeWh, emailU) VALUES ('20', '$date', '$email')";
 					$resultat2 = pg_query($requete2) or die('ERREUR SQL : '. $requete2 .    pg_last_error());
+					$requete3 = "INSERT INTO bankinginformations(emailU) VALUES ('$email')";
+					$resultat3 = pg_query($requete3) or die('ERREUR SQL : '. $requete3 .    pg_last_error());
 					echo '<body onLoad="alert(\'Enregistrement de votre compte effectué\')">';
 			    	echo '<meta http-equiv="refresh" content="0;URL=profil.php">';
 				}
@@ -79,6 +81,7 @@
 
 	}
 
+	// for the location register
 	if (isset($_POST['enLigne'])){
 		$dbconn = connectionDB();
 		$type = $_POST['type'];
@@ -103,7 +106,10 @@
 		$path3 = 'pictures/photo_location/'.basename($_FILES['image3']['name']);
 		$date = date("Y-m-d");
 
+		/* like the previous function we take all the informations of the forms and if a location like the user try to register is already existing  
+			we don't register it into the database 
 
+		*/
 		$requet = "SELECT emailU FROM rent WHERE typeRent='$type' AND brandRent='$marque' AND kilometerRent='$kilometer' AND nameRent='$title' AND serieRent='$modele'";
 		$resultat = pg_query($requet) or die('ERREUR SQL : '. $requet . 	pg_last_error());
 		$emailuti='';
@@ -121,7 +127,7 @@
 		}
 
 		else{
-			
+			//this allows us to display 4 pictures at the same times in the database
 			if (($_FILES['image']['size']<=5000000) && ($_FILES['image1']['size']<=5000000) && ($_FILES['image2']['size']<=5000000) && ($_FILES['image3']['size']<=5000000)) {
 				$infofichier = pathinfo($_FILES['image']['name']);
 				$infofichier1 = pathinfo($_FILES['image1']['name']);
