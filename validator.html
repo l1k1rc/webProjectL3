@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <title>Rent a Car.</title>
+    <link rel="stylesheet" type="text/css" href="withTest.css" media="screen">
+    <style>
+        input[type=text], input[type=password]{
+            width: 100%;
+            padding :12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    </style>
+    <link rel="icon" href="pictures/iconCar.png" />
+</head>
+<body>
+<div class="pictureBackground"></div>
+    <div class="ourPage">
+    <div class="header">
+            <div class="siteTitle">
+              <h1>Rent a car .</h1>
+            </div>
+            <div class="menu">
+              <a href="index.php" class="active"><img src="pictures/home.png">&nbsp;&nbsp;&nbsp;Home</a>
+              <a href="profil.php"><img src="pictures/connect.png">&nbsp;&nbsp;&nbsp;Profil</a>
+              <a href="#"><img src="pictures/historical.png">&nbsp;&nbsp;&nbsp;Historique</a>
+              <a href="logout.php"><img src="pictures/logout.png">&nbsp;&nbsp;&nbsp;Logout</a>
+            </div>             <div class="typeRentChoice">
+                <a href='location.php'" class="a1">Proposer une location</a>
+                <a href="covoiturage.php" class="a2">Proposer un covoiturage</a>
+            </div>
+            <div id="resultContainer">
+                <p style='font-family: MANIFESTO, sans-serif; font-size: 40px; text-align: center; color: tomato;'>- Profil -</p>
+                <center><img src=/pictures/photo_profil/default.png style='  box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 150px; height: 150px; margin-left:auto; margin-right:auto;'></center>
+                <div class='compartments'>
+                    <p style='font-family: MANIFESTO, sans-serif; font-size: 20px; text-align: center; color: tomato; margin-bottom: 15px;'>Details du profil</p>
+                    <p class='descriptionAnnounceBis' style='top: 30%;'><b class='motImportant' >Email :</b> supraccoon@gmail.com                              <br /><b class='motImportant' >Nom :</b> Coccoon <br /><b class='motImportant' >Prenom :</b> Raccoon <br /> <b class='motImportant' >Age :</b> 1 <br /><b class='motImportant' >Genre :</b> TRUE                           <br /><b class='motImportant' >Téléphone :</b> 0192836452          </p>                <input type="button" value="Editer le profil" onclick="window.location.href='profilEdit.php'" class="getProfil">
+                </div>
+                <div class="compartments">
+                    <p style="font-family: MANIFESTO, sans-serif; font-size: 20px; text-align: center; color: tomato;">Mes annonces</p>
+                      <div class='compartments'><p class='descriptionAnnounce'>     <b> Test</b><br /> <br />
+    Marque :  Renault <br />
+    Transmission :  manuelle <br />
+    Catégorie :  citadine <br />
+    Nombre de sièges :  5 <br />
+    <b style='color:tomato; font-size:25px;'>  39 $</b> <br />
+</p><img src='pictures/photo_location/voiture3.jpg' style='margin-right : 1%; box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'><input type='button' value='Supprimer annonce' onclick='window.location.href=''' class='getProfil' style='margin-bottom : 50px;'><a class='getProfil' href='detailedAnnounce.php?psd=16'>Consulter annonce</a> </div>
+  <div class='compartments'><p class='descriptionAnnounce'>     <b> Une renault neuve</b><br /> <br />
+    Marque :  Renault <br />
+    Transmission :  manuelle <br />
+    Catégorie :  citadine <br />
+    Nombre de sièges :  5 <br />
+    <b style='color:tomato; font-size:25px;'>  54.99 $</b> <br />
+</p><img src='pictures/photo_location/voiture4.jpg' style='margin-right : 1%; box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'><input type='button' value='Supprimer annonce' onclick='window.location.href=''' class='getProfil' style='margin-bottom : 50px;'><a class='getProfil' href='detailedAnnounce.php?psd=18'>Consulter annonce</a> </div>
+  <div class='compartments'><p class='descriptionAnnounce'>     <b> Une renault neuve</b><br /> <br />
+    Marque :  Renault <br />
+    Transmission :  manuelle <br />
+    Catégorie :  citadine <br />
+    Nombre de sièges :  5 <br />
+    <b style='color:tomato; font-size:25px;'>  3 $</b> <br />
+</p><img src='pictures/photo_location/thon@gmail.com.jpg' style='margin-right : 1%; box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'><input type='button' value='Supprimer annonce' onclick='window.location.href=''' class='getProfil' style='margin-bottom : 50px;'><a class='getProfil' href='detailedAnnounce.php?psd=19'>Consulter annonce</a> </div>
+  <div class='compartments'><p class='descriptionAnnounce'>     <b> Une renault neuve</b><br /> <br />
+    Marque :  Renault <br />
+    Transmission :  manuelle <br />
+    Catégorie :  citadine <br />
+    Nombre de sièges :  5 <br />
+    <b style='color:tomato; font-size:25px;'>  29.99 $</b> <br />
+</p><img src='pictures/photo_location/thon@gmail.com.jpg' style='margin-right : 1%; box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'><input type='button' value='Supprimer annonce' onclick='window.location.href=''' class='getProfil' style='margin-bottom : 50px;'><a class='getProfil' href='detailedAnnounce.php?psd=20'>Consulter annonce</a> </div>
+  <div class='compartments'><p class='descriptionAnnounce'>     <b> Une renault neuve</b><br /> <br />
+    Marque :  Renault <br />
+    Transmission :  manuelle <br />
+    Catégorie :  citadine <br />
+    Nombre de sièges :  5 <br />
+    <b style='color:tomato; font-size:25px;'>  4 $</b> <br />
+</p><img src='pictures/photo_location/thon@gmail.com.jpg' style='margin-right : 1%; box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'><input type='button' value='Supprimer annonce' onclick='window.location.href=''' class='getProfil' style='margin-bottom : 50px;'><a class='getProfil' href='detailedAnnounce.php?psd=21'>Consulter annonce</a> </div>
+  <div class='compartments'><p class='descriptionAnnounce'>     <b> Une renault neuve</b><br /> <br />
+    Marque :  Renault <br />
+    Transmission :  manuelle <br />
+    Catégorie :  citadine <br />
+    Nombre de sièges :  5 <br />
+    <b style='color:tomato; font-size:25px;'>  2 $</b> <br />
+</p><img src='pictures/photo_location/aaaaaaaaaaaaaaaa.jpg' style='margin-right : 1%; box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'><input type='button' value='Supprimer annonce' onclick='window.location.href=''' class='getProfil' style='margin-bottom : 50px;'><a class='getProfil' href='detailedAnnounce.php?psd=23'>Consulter annonce</a> </div>
+  <div class='compartments'><p class='descriptionAnnounce'>     <b> Une renault neuve</b><br /> <br />
+    Marque :  Renault <br />
+    Transmission :  semiauto <br />
+    Catégorie :  citadine <br />
+    Nombre de sièges :  5 <br />
+    <b style='color:tomato; font-size:25px;'>  3 $</b> <br />
+</p><img src='pictures/photo_location/aaaaaaaaaaaaaaaa.jpg' style='margin-right : 1%; box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'><input type='button' value='Supprimer annonce' onclick='window.location.href=''' class='getProfil' style='margin-bottom : 50px;'><a class='getProfil' href='detailedAnnounce.php?psd=24'>Consulter annonce</a> </div>
+  <div class='compartments'><p class='descriptionAnnounce'>     <b> Une renault neuve</b><br /> <br />
+    Marque :  Renault <br />
+    Transmission :  manuelle <br />
+    Catégorie :  citadine <br />
+    Nombre de sièges :  5 <br />
+    <b style='color:tomato; font-size:25px;'>  5 $</b> <br />
+</p><img src='pictures/photo_location/aaaaaaaaaaaaaaaa.jpg' style='margin-right : 1%; box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'><input type='button' value='Supprimer annonce' onclick='window.location.href=''' class='getProfil' style='margin-bottom : 50px;'><a class='getProfil' href='detailedAnnounce.php?psd=25'>Consulter annonce</a> </div>
+  <div class='compartments'><p class='descriptionAnnounce'>     <b> Une renault neuve</b><br /> <br />
+    Marque :  Renault <br />
+    Transmission :  manuelle <br />
+    Catégorie :  citadine <br />
+    Nombre de sièges :  5 <br />
+    <b style='color:tomato; font-size:25px;'>  4 $</b> <br />
+</p><img src='pictures/photo_location/aaaaaaaaaaaaaaaa.jpg' style='margin-right : 1%; box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'><input type='button' value='Supprimer annonce' onclick='window.location.href=''' class='getProfil' style='margin-bottom : 50px;'><a class='getProfil' href='detailedAnnounce.php?psd=26'>Consulter annonce</a> </div>
+  <div class='compartments'><p class='descriptionAnnounce'>     <b> Une renault neuve</b><br /> <br />
+    Marque :  Renault <br />
+    Transmission :  manuelle <br />
+    Catégorie :  citadine <br />
+    Nombre de sièges :  5 <br />
+    <b style='color:tomato; font-size:25px;'>  3 $</b> <br />
+</p><img src='pictures/photo_location/aaaaaaaaaaaaaaaa.jpg' style='margin-right : 1%; box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'><input type='button' value='Supprimer annonce' onclick='window.location.href=''' class='getProfil' style='margin-bottom : 50px;'><a class='getProfil' href='detailedAnnounce.php?psd=27'>Consulter annonce</a> </div>
+  <div class='compartments'><p class='descriptionAnnounce'>     <b> Une renault neuve</b><br /> <br />
+    Marque :  Renault <br />
+    Transmission :  manuelle <br />
+    Catégorie :  citadine <br />
+    Nombre de sièges :  5 <br />
+    <b style='color:tomato; font-size:25px;'>  5 $</b> <br />
+</p><img src='pictures/photo_location/aaaaaaaaaaaaaaaa.jpg' style='margin-right : 1%; box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'><input type='button' value='Supprimer annonce' onclick='window.location.href=''' class='getProfil' style='margin-bottom : 50px;'><a class='getProfil' href='detailedAnnounce.php?psd=28'>Consulter annonce</a> </div>
+  <div class='compartments'><p class='descriptionAnnounce'>     <b> Une renault neuve</b><br /> <br />
+    Marque :  Renault <br />
+    Transmission :  manuelle <br />
+    Catégorie :  citadine <br />
+    Nombre de sièges :  5 <br />
+    <b style='color:tomato; font-size:25px;'>  5 $</b> <br />
+</p><img src='pictures/photo_location/aaaaaaaaaaaaaaaa.jpg' style='margin-right : 1%; box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'><input type='button' value='Supprimer annonce' onclick='window.location.href=''' class='getProfil' style='margin-bottom : 50px;'><a class='getProfil' href='detailedAnnounce.php?psd=29'>Consulter annonce</a> </div>
+  <div class='compartments'><p class='descriptionAnnounce'>     <b> Une renault neuve</b><br /> <br />
+    Marque :  Renault <br />
+    Transmission :  manuelle <br />
+    Catégorie :  citadine <br />
+    Nombre de sièges :  5 <br />
+    <b style='color:tomato; font-size:25px;'>  5 $</b> <br />
+</p><img src='pictures/photo_location/aaaaaaaaaaaaaaaa.jpg' style='margin-right : 1%; box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'><input type='button' value='Supprimer annonce' onclick='window.location.href=''' class='getProfil' style='margin-bottom : 50px;'><a class='getProfil' href='detailedAnnounce.php?psd=30'>Consulter annonce</a> </div>
+  <div class='compartments'><p class='descriptionAnnounce'>     <b> Une renault neuve</b><br /> <br />
+    Marque :  Renault <br />
+    Transmission :  manuelle <br />
+    Catégorie :  citadine <br />
+    Nombre de sièges :  5 <br />
+    <b style='color:tomato; font-size:25px;'>  5 $</b> <br />
+</p><img src='pictures/photo_location/aaaaaaaaaaaaaaaa.jpg' style='margin-right : 1%; box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'><input type='button' value='Supprimer annonce' onclick='window.location.href=''' class='getProfil' style='margin-bottom : 50px;'><a class='getProfil' href='detailedAnnounce.php?psd=31'>Consulter annonce</a> </div>
+  <div class='compartments'><p class='descriptionAnnounce'>     <b> Une renault neuve</b><br /> <br />
+    Marque :  Renault <br />
+    Transmission :  manuelle <br />
+    Catégorie :  citadine <br />
+    Nombre de sièges :  5 <br />
+    <b style='color:tomato; font-size:25px;'>  4 $</b> <br />
+</p><img src='pictures/photo_location/aaaaaaaaaaaaaaaa.jpg' style='margin-right : 1%; box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'><input type='button' value='Supprimer annonce' onclick='window.location.href=''' class='getProfil' style='margin-bottom : 50px;'><a class='getProfil' href='detailedAnnounce.php?psd=32'>Consulter annonce</a> </div>
+  <div class='compartments'><p class='descriptionAnnounce'>     <b> Une renault neuve</b><br /> <br />
+    Marque :  Renault <br />
+    Transmission :  semiauto <br />
+    Catégorie :  citadine <br />
+    Nombre de sièges :  5 <br />
+    <b style='color:tomato; font-size:25px;'>  5 $</b> <br />
+</p><img src='pictures/photo_location/aaaaaaaaaaaaaaaa.jpg' style='margin-right : 1%; box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'><input type='button' value='Supprimer annonce' onclick='window.location.href=''' class='getProfil' style='margin-bottom : 50px;'><a class='getProfil' href='detailedAnnounce.php?psd=33'>Consulter annonce</a> </div>
+  <div class='compartments'><p class='descriptionAnnounce'>     <b> Une renault neuve</b><br /> <br />
+    Marque :  Renault <br />
+    Transmission :  manuelle <br />
+    Catégorie :  citadine <br />
+    Nombre de sièges :  5 <br />
+    <b style='color:tomato; font-size:25px;'>  5 $</b> <br />
+</p><img src='pictures/photo_location/aaaaaaaaaaaaaaaa.jpg' style='margin-right : 1%; box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'><input type='button' value='Supprimer annonce' onclick='window.location.href=''' class='getProfil' style='margin-bottom : 50px;'><a class='getProfil' href='detailedAnnounce.php?psd=34'>Consulter annonce</a> </div>
+                </div>
+                <div class="compartments">
+                    <p style="font-family: MANIFESTO, sans-serif; font-size: 20px; text-align: center; color: tomato;">Mes covoiturages</p>
+                </div>
+                <div class="compartments">
+                    <p style="font-family: MANIFESTO, sans-serif; font-size: 20px; text-align: center; color: tomato;">Solde du compte</p>
+                    <input type="button" value="Recharger le compte" onclick="window.location.href='../index.php'" class="getProfil">
+                </div>       
+            </div>
+    </div>
+</div>
+</body>
+</html>

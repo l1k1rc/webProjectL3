@@ -1,20 +1,15 @@
 <?php 
   require('postgres.func.php'); 
-
 /**** Display the rental's choice in HTML ****/
+
 	function displayForTheFirstChoice(){
-		echo '            <div class="content" style="">
+    $selectOptions=displayBrandForSelectOption();
+		echo '     <div class="content" style="">
                <form method="post" action="rentalResult.php">                       <!-- -->
                 <div id="serieOption1">
                       <label for="brand">Marque :</label><br />
-                       <select name="brand" id="brand">
-                           <option value="Renault">Renault</option>
-                           <option value="Koenigsegg">Koenigsegg</option>
-                           <option value="Ford">Ford</option>
-                           <option value="BMW">BMW</option>
-                           <option value="Volkswaggen">Volkswaggen</option>
-                           <option value="Fiat">Fiat</option>
-                           <option value="Peugeot">Peugeot</option>
+                       <select name="brand" id="brand" size="1">
+                            '.$selectOptions.'
                       </select> 
                       <br />
                       <label for="category">Catégorie</label>
@@ -30,13 +25,11 @@
                       <label for="nbrPlace">Nombre de place</label>
                       <input type="number" name="nbrPlace" min="1" max="7" id="nbrPlace">
                       <br />
-                      <label for="disponibility">Date de retrait :</label>
-                      <input type="date" name="disponibility" id="disponibility">
-                      <br />
                 </div>
                 <div id="serieOption2">
-                       <label for="pricePerDay">Prix en euro par jour :</label>
-                       <input type="range" id="pricePerDay" name="pricePerDay" min="10" max="100" id="pricePerDay" />
+                       <label for="pricePerDay">Prix en euro par jour (maximum) :</label>
+                       <input type="range" name="priceInput" id="priceInputId" value="50" min="1" max="600" oninput="priceOutputId.value = priceInputId.value">
+                       <output name="priceOutput" id="priceOutputId">50</output><label for="priceOutputId" style="color:tomato; font-size:20px;"> $</label>
                        <br />
                        <label for="gearbox">Transmission:</label><br />
                        <select name="gearbox" id="gearbox">
@@ -48,8 +41,6 @@
                       <label for="age">Âge du conducteur :</label>
                       <input type="text" name="age" required="required" id="age">
                       <br />
-                      <label for="endC">Date de retour :</label>
-                      <input type="date" name="endC" id="endC">
                 </div>
               <input type="submit" id="valid" name="valid"/>
             	</form>                                                                <!-- -->
@@ -116,18 +107,18 @@
     function displayMenu(){
       if(empty($_SESSION['login'])){
       	echo '<div class="menu">
-                <a href="index.php" class="active"><img src="pictures/home.png" alt="">&nbsp;&nbsp;&nbsp;Home</a>
-                <a href="register.php"><img src="pictures/inscrip.png" alt="">&nbsp;&nbsp;&nbsp;S\'inscrire</a>
-                <a href="connection.php"><img src="pictures/connect.png" alt="">&nbsp;&nbsp;&nbsp;Se connecter</a>
+                <a href="index.php" class="active"><img src="pictures/home.png">&nbsp;&nbsp;&nbsp;Home</a>
+                <a href="register.php"><img src="pictures/inscrip.png">&nbsp;&nbsp;&nbsp;S\'inscrire</a>
+                <a href="connection.php"><img src="pictures/connect.png">&nbsp;&nbsp;&nbsp;Se connecter</a>
               </div>';
       }
     }
     function displayConnectedMenu(){
     	echo '<div class="menu">
-              <a href="index.php" class="active"><img src="pictures/home.png" alt="">&nbsp;&nbsp;&nbsp;Home</a>
-              <a href="profil.php"><img src="pictures/connect.png" alt="">&nbsp;&nbsp;&nbsp;Profil</a>
-              <a href="#"><img src="pictures/historical.png" alt="">&nbsp;&nbsp;&nbsp;Historique</a>
-              <a href="logout.php"><img src="pictures/logout.png" alt="">&nbsp;&nbsp;&nbsp;Logout</a>
+              <a href="index.php" class="active"><img src="pictures/home.png">&nbsp;&nbsp;&nbsp;Home</a>
+              <a href="profil.php"><img src="pictures/connect.png">&nbsp;&nbsp;&nbsp;Profil</a>
+              <a href="#"><img src="pictures/historical.png">&nbsp;&nbsp;&nbsp;Historique</a>
+              <a href="logout.php"><img src="pictures/logout.png">&nbsp;&nbsp;&nbsp;Logout</a>
             </div>';
     }
     /* A finir avec la BDD stockage, envoie, stockage long-terme ... */
@@ -138,9 +129,10 @@
 
     	}
     }
-        function profilDisplay($email){
+    //Display of somebody user page
+    function profilDisplay($email){
       $dbconn =connectionDB();
-
+      //Simple collect of user infos
       $req = pg_query("SELECT emailu FROM users WHERE emailu='".$email."'") or die('Échec de la requête : ' . pg_last_error());
       $array[0] = pg_fetch_array($req, null, PGSQL_ASSOC);
 
@@ -154,16 +146,15 @@
       $array[3] = pg_fetch_array($req, null, PGSQL_ASSOC);
 
       $req = pg_query("SELECT gender FROM users WHERE emailu='".$email."'") or die('Échec de la requête : ' . pg_last_error());
-      $gender = pg_fetch_array($req, null, PGSQL_ASSOC);
-      if ($gender['gender'] == "t"){
-        $array[4] = "Homme";
-      }else{
-        $array[4] = "Femme";
-      }
+      $array[4] = pg_fetch_array($req, null, PGSQL_ASSOC);
 
       $req = pg_query("SELECT phoneu FROM users WHERE emailu='".$email."'") or die('Échec de la requête : ' . pg_last_error());
       $array[5] = pg_fetch_array($req, null, PGSQL_ASSOC);
-      
+
+      $req = pg_query("SELECT profilimgu FROM users WHERE emailu='".$email."'") or die('Échec de la requête : ' . pg_last_error());
+      $array[6] = pg_fetch_array($req, null, PGSQL_ASSOC);
+      if ($array[6]['profilimgu'] == "") $array[6]['profilimgu'] = "./profilImg/default.png";
+
       pg_close($dbconn);
       return $array;
     }

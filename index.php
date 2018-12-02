@@ -1,5 +1,6 @@
 <?php require('displayFunctions.php'); 
-ini_set("display_errors",0);error_reporting(0);?>
+ini_set("display_errors",0);error_reporting(0);
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -32,7 +33,7 @@ ini_set("display_errors",0);error_reporting(0);?>
 <div class="ourPage">
     <div class="header">
             <div class="siteTitle">
-              <h1>Rent a car .</h1>
+              <h1>Rent 2 cars.</h1>
             </div>
             <?php displayMenu(); 
               if(!empty($_SESSION['login'])){

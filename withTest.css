@@ -152,7 +152,7 @@ a{color: tomato;}
   min-width: 1100px;
   background: #303030;
   margin: 5px auto;
-  min-height: 500px;
+  min-height: 450px;
   padding: 40px;
   color: white;
   border:#000000 1px solid;
@@ -218,6 +218,12 @@ a{color: tomato;}
 .a2{
   float: right;
 }
+#priceOutputId{
+  color: tomato;
+  font-size: 20px;
+  margin-left: 47%;
+}
+
 /******************************************************************************************** Menu ************************************************************************************************/
 .menu {
     float: left;
@@ -306,6 +312,21 @@ a{color: tomato;}
   right: 2%;
   bottom: 10%;
 }
+
+.getProfil2{
+  background-color: tomato;
+  border: 1px solid tomato;
+  text-align: center;
+  font-size: 14px;
+  color: white;
+  padding: 7px 21px;
+  border-radius:4px;
+  cursor: pointer;
+  box-shadow: 0 0 20px 0 rgba(0,0,0,0.2), 0 5px 5px rgba(0,0,0,0.24);
+  transition: 1s;
+  margin-top: 15px;
+}
+
 .getProfil:hover{
   background-color: white;
   color: tomato;
@@ -392,7 +413,7 @@ a{color: tomato;}
   font-size: 20px;
   line-height: 150%;
 }
-/***********************************************************************************************************Etoiles****************************************************************************/
+/***********************************************************************************************************comment page****************************************************************************/
 .rating{
   margin-bottom: 70px;
   margin-right: 42%;
@@ -511,4 +532,18 @@ a{color: tomato;}
   color: white;
   display: flex;
   justify-content: space-between;
+}
+/***********************************************************************************************************location Page *************************************************************/
+#leftSide{
+  width: 47%;
+  float: left;
+  margin-bottom: 100px;
+}
+#rightSide{
+  width: 47%;
+  float: right;
+  margin-bottom: 100px;
+}
+#filePart{
+  top: 50%;
 }
