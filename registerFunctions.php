@@ -1,4 +1,4 @@
-<?php 
+ <?php 
 	require ('displayFunctions.php');
 	function sayWarning($deleted=''){
         echo '<body onLoad="alert( '.$deleted.')">';
@@ -9,7 +9,12 @@
 	if(isset($_POST['validRegister']) ){
 		// we take all the informations from the forms
 		$dbconn = connectionDB();
-	    $path = 'pictures/photo_profil/'.basename($_FILES['photo']['name']);
+		if (!empty($_FILES['photo']['name'])) {
+			$path = 'pictures/photo_profil/'.basename($_FILES['photo']['name']);
+		}
+	    else{
+	    	$path = 'pictures/photo_profil/default.png';
+	    }
 		$name = $_POST['name'];
 		$surname = $_POST['surname'];
 		$age = $_POST['age'];
@@ -49,30 +54,42 @@
 
 		//else we insert into the database the informations about the client and put his profil picture into the database too
 		if ($k!=2) {
-			if ($_FILES['photo']['size']<=5000000) {
-				$infosfichier = pathinfo($_FILES['photo']['name']);
-				$extensionsupload = $infosfichier['extension'];
-				$extension_allowed = array('jpg','jpeg','png');
-				if (in_array($extensionsupload, $extension_allowed)) {
-					move_uploaded_file($_FILES['photo']['tmp_name'], $path);
+			if (!empty($_FILES['photo']['name'])) {
+				if ($_FILES['photo']['size']<=5000000) {
+					$infosfichier = pathinfo($_FILES['photo']['name']);
+					$extensionsupload = $infosfichier['extension'];
+					$extension_allowed = array('jpg','jpeg','png');
+					if (in_array($extensionsupload, $extension_allowed)) {
+						move_uploaded_file($_FILES['photo']['tmp_name'], $path);
 
-					$requete1 = "INSERT INTO users VALUES('$email', '$name', '$surname', '$age', '$sexe', '$phone', '$password_hash', '$path')";
-					$resultat = pg_query($requete1) or die('ERREUR SQL : '. $requete1 . 	pg_last_error());
-					$requete2 = "INSERT INTO warehouse (balanceWh, date_exchangeWh, emailU) VALUES ('20', '$date', '$email')";
-					$resultat2 = pg_query($requete2) or die('ERREUR SQL : '. $requete2 .    pg_last_error());
-					$requete3 = "INSERT INTO bankinginformations(emailU) VALUES ('$email')";
-					$resultat3 = pg_query($requete3) or die('ERREUR SQL : '. $requete3 .    pg_last_error());
-					echo '<body onLoad="alert(\'Enregistrement de votre compte effectué\')">';
-			    	echo '<meta http-equiv="refresh" content="0;URL=profil.php">';
+						$requete1 = "INSERT INTO users VALUES('$email', '$name', '$surname', '$age', '$sexe', '$phone', '$password_hash', '$path')";
+						$resultat = pg_query($requete1) or die('ERREUR SQL : '. $requete1 . 	pg_last_error());
+						$requete2 = "INSERT INTO warehouse (balanceWh, date_exchangeWh, emailU) VALUES ('20', '$date', '$email')";
+						$resultat2 = pg_query($requete2) or die('ERREUR SQL : '. $requete2 .    pg_last_error());
+						$requete3 = "INSERT INTO bankinginformations(emailU) VALUES ('$email')";
+						$resultat3 = pg_query($requete3) or die('ERREUR SQL : '. $requete3 .    pg_last_error());
+						echo '<body onLoad="alert(\'Enregistrement de votre compte effectué\')">';
+				    	echo '<meta http-equiv="refresh" content="0;URL=connection.php">';
+					}
+					else{
+						echo '<body onLoad="alert(\'Mauvaise extension de photo\')">';
+				    	echo '<meta http-equiv="refresh" content="0;URL=register.php">';
+					}
 				}
 				else{
-					echo '<body onLoad="alert(\'Mauvaise extension de photo\')">';
-			    	echo '<meta http-equiv="refresh" content="0;URL=register.php">';
+					echo '<body onLoad="alert(\'Taille de la photo trop volumineuse\')">';
+				    echo '<meta http-equiv="refresh" content="0;URL=register.php">';
 				}
 			}
 			else{
-				echo '<body onLoad="alert(\'Taille de la photo trop volumineuse\')">';
-			    echo '<meta http-equiv="refresh" content="0;URL=register.php">';
+				$requete1 = "INSERT INTO users VALUES('$email', '$name', '$surname', '$age', '$sexe', '$phone', '$password_hash', '$path')";
+				$resultat = pg_query($requete1) or die('ERREUR SQL : '. $requete1 . 	pg_last_error());
+				$requete2 = "INSERT INTO warehouse (balanceWh, date_exchangeWh, emailU) VALUES ('20', '$date', '$email')";
+				$resultat2 = pg_query($requete2) or die('ERREUR SQL : '. $requete2 .    pg_last_error());
+				$requete3 = "INSERT INTO bankinginformations(emailU) VALUES ('$email')";
+				$resultat3 = pg_query($requete3) or die('ERREUR SQL : '. $requete3 .    pg_last_error());
+				echo '<body onLoad="alert(\'Enregistrement de votre compte effectué\')">';
+				echo '<meta http-equiv="refresh" content="0;URL=connection.php">';
 			}
 			
 
@@ -89,7 +106,7 @@
 		$marque = $_POST['marque'];
 		$modele = $_POST['modele'];
 		$kilometer = $_POST['kilometer'];
-		$title = $_POST['titleloc'];
+		$title = str_replace("'","[\quote]",$_POST['titleloc']);
 		$seat = $_POST['places'];
 		$door = $_POST['portes'];
 		$horseP = $_POST['puissance'];
@@ -98,7 +115,7 @@
 		$emailloc = $_POST['email'];
 		$duree = $_POST['duree']." semaines";
 		$price = $_POST['prix'];
-		$commentary = $_POST['commentaryArea'];
+		$commentary=str_replace("'","[\quote]",$_POST['commentaryArea']);
 		$possibility = "TRUE";
 		$path = 'pictures/photo_location/'.basename($_FILES['image']['name']);
 		$path1 = 'pictures/photo_location/'.basename($_FILES['image1']['name']);
@@ -166,7 +183,7 @@
 								$requete8 = "INSERT INTO file2(path2photofiles, idRent) VALUES ('$path3','$idrent')";
 								$result5 = pg_query($requete8) or die('ERREUR SQL : '. $requete8 . 	pg_last_error());
 		    					echo '<body onLoad="alert(\'Enregistrement de la location effectué\')">';
-		    					echo '<meta http-equiv="refresh" content="0;URL=rentalResult.php">';
+		    					echo '<meta http-equiv="refresh" content="0;URL=profil.php">';
 							}
 							else {
 								echo '<body onLoad="alert(\'Erreur extension image 3\')">';

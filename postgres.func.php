@@ -75,7 +75,15 @@
 			$tab.="<h3>Description</h3>";
 			$tab.="<p class='paraphUser'>";
 			foreach ($l as $val) { // enfin, cette 2ème boucle pour l'intérieur de la description HTML
-				if($i<12){ // le 12ème est le chemin path image
+				if($i<12 && $i!=10 && $i!=1){ // le 12ème est le chemin path image
+					$tab.="$nameCol[$i] $val <br />";
+				}
+				if($i==10){
+					$val = str_replace("[\quote]","'",$val);
+					$tab.="$nameCol[$i] $val <br />";
+				}
+				if($i==1) {
+					$val = str_replace("[\quote]","'",$val);
 					$tab.="$nameCol[$i] $val <br />";
 				}
 				$i++;

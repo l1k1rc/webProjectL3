@@ -18,23 +18,23 @@ ini_set("display_errors",0);error_reporting(0);?>
             margin-left: 15%;
         }
         input[type=submit]{
-			  background-color: tomato;
-			  color: white;
-			  padding: 7px 21px;
-			  border: 1px solid tomato;
-			  border-radius:4px;
-			  cursor: pointer;
-			  box-shadow: 0 0 20px 0 rgba(0,0,0,0.2), 0 5px 5px rgba(0,0,0,0.24);
-			  transition: 1s;
-			  margin-left:40%;
-			  margin-top: 20px;
-		}
-		input[type=submit]:hover{
-			  background-color: white;
-			  color: tomato;
-			  border: 1px solid tomato;
-			  border-radius:4px;
-		}
+              background-color: tomato;
+              color: white;
+              padding: 7px 21px;
+              border: 1px solid tomato;
+              border-radius:4px;
+              cursor: pointer;
+              box-shadow: 0 0 20px 0 rgba(0,0,0,0.2), 0 5px 5px rgba(0,0,0,0.24);
+              transition: 1s;
+              margin-left:40%;
+              margin-top: 20px;
+        }
+        input[type=submit]:hover{
+              background-color: white;
+              color: tomato;
+              border: 1px solid tomato;
+              border-radius:4px;
+        }
     </style>
     <link rel="icon" href="pictures/iconCar.png" />
 </head>
@@ -54,27 +54,27 @@ ini_set("display_errors",0);error_reporting(0);?>
               }
             ?>
             <div id="registerPage">
-            	<form enctype="multipart/form-data" method="post" action="registerFunctions.php"> 
-            		<br /><label id="name">Votre nom :</label><br />
-            		<input type="text" name="name">
-            		<br /><label id="surname">Votre prénom :</label><br />
-            		<input type="text" name="surname">
-            		<br /><label id="age">Votre âge :</label><br />
-            		<input type="number" name="age">
-            		<br /><label id="mail">Votre email :</label><br />
-            		<input type="email" name="mail">
-            		<br /><label id="sexe">Votre sexe :</label><br />
-            		<select name="sexe" class="sexe">
+                <form enctype="multipart/form-data" method="post" action="registerFunctions.php"> 
+                    <br /><label id="name">Votre nom :</label><br />
+                    <input type="text" name="name" required="">
+                    <br /><label id="surname">Votre prénom :</label><br />
+                    <input type="text" name="surname" required="">
+                    <br /><label id="age">Votre âge :</label><br />
+                    <input type="number" name="age" required="">
+                    <br /><label id="mail">Votre email :</label><br />
+                    <input type="email" name="mail" required="">
+                    <br /><label id="sexe">Votre sexe :</label><br />
+                    <select name="sexe" class="sexe">
                            <option value="femme">Femme</option>
                            <option value="homme">Homme</option>
                     </select>
                     <br /><label id="phone">Votre n°- de téléphone :</label><br />
-                    <input type="tel" name="phone">
+                    <input type="tel" name="phone" required="">
                     <br /><label id="password">Votre mot de passe :</label><br />
-                    <input type="password" name="password"><br />
+                    <input type="password" name="password" required=""><br />
                     <br />
                     <label>Votre photo de profil (jpg, jpeg, png) :</label>
-                    <input type="file" accept="image/*" onchange="loadFile(event)" name="photo" id="photo" required="" style="margin-bottom: 1cm">
+                    <input type="file" accept="image/*" onchange="loadFile(event)" name="photo" id="photo" style="margin-bottom: 1cm">
                     <br />
                     <img id="output" style="max-width: 180px; margin-bottom: 1cm; margin-left: 5cm;" alt="" src="aaa"> 
                     <br />
@@ -91,7 +91,7 @@ ini_set("display_errors",0);error_reporting(0);?>
                             };
                      </script>
                     <input type="submit" name="validRegister" value="Valider l'inscription">
-            	</form>
+                </form>
             </div>
     </div>
 </div>

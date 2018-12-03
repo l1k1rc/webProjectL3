@@ -1,5 +1,11 @@
 <?php 
     require('registerFunctions.php');
+    function loclogin(){
+        if(!empty($_SESSION['login'])){
+           return '<input type="text" name="email" required="" value="'.$_SESSION['login'].'">';
+        }
+    }
+   
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -77,27 +83,27 @@
                         <input type="color" name="couleur">
                         <br />
                         <label for="marque">Veuillez saisir la marque de votre voiture :</label><br />
-                        <input type="text" name="marque">
+                        <input type="text" name="marque" required="">
                         <br />
                         <label for="kilometer">Veuillez saisir le kilométrage de votre voiture :</label><br />
-                        <input type="text" name="kilometer">
+                        <input type="text" name="kilometer" required="">
                         <br />
                         <label for="modele">Veuillez saisir le modèle de votre voiture :</label><br />
-                        <input type="text" name="modele">
+                        <input type="text" name="modele" required="">
                         <br />
                         <label for="titleloc">Veuillez saisir le titre de votre location :</label><br />
-                        <input type="text" name="titleloc">
+                        <input type="text" name="titleloc" required="">
                         <br />
                         <label for="places">Veuillez saisir le nombre de places :</label><br />
-                        <input type="number" name="places" min="1" max="7">
+                        <input type="number" name="places" min="1" max="7" required="">
                         <br />
                     </div>
                     <div id="rightSide">
                         <label for="portes">Veuillez saisir le nombre de portes :</label><br />
-                        <input type="number" name="portes" min="1" max="5">
+                        <input type="number" name="portes" min="1" max="5" required="">
                         <br />
                         <label for="puissance">Veuillez saisir la puissance de la voiture :</label><br />
-                        <input type="text" name="puissance">
+                        <input type="text" name="puissance" required="">
                         <br />
                         <label for="boite">Veuillez saisir le type de la boite de vitesse :</label><br />
                         <select name="boite">
@@ -115,14 +121,14 @@
                         </select>
                         <br />
                         <label for="email">Veuillez saisir l'E-Mail où vous contacter :</label><br />
-                        <input type="text" name="email">
+                        <?php echo loclogin(); ?>
                         <br />
                         <label for="duree">Veuillez saisir la durée de location :</label><br />
-                        <input type="number" name="duree" min="1" max="12">
+                        <input type="number" name="duree" min="1" max="12" required="">
                         <label>semaines</label><br />
                         <br />
                         <label for="prix">Veuillez saisir le prix de la location :</label><br />
-                        <input type="text" name="prix">
+                        <input type="text" name="prix" required="">
                         <label>/jour</label><br />
                         <br />
                     </div><br />
@@ -199,14 +205,3 @@
     </div>
 </body>
 </html>
-
-<!-- nav>li.item$*5  -->
-
-<!-- (form>input[type=text].item$*4+input[type=submit]#valid) -->
-
-<!-- !>form#formulaire>input[type=text].item$*4+input[type=submit]#valid -->
-
-<!-- !>h1{Mon blog}+(p.item$>img)*2>form>(input[type=text]*3)+input[type=submit]#valid -->
-
-
-
