@@ -67,7 +67,7 @@
             ?>
              <div class="typeRentChoice">
                 <a href="location.php" class="a1">Proposer une location</a>
-                <a href="covoiturage.php" class="a2">Proposer un covoiturage</a>
+                <a href="carpool.php" class="a2">Proposer un covoiturage</a>
             </div>
             <div id="resultContainer">
                 <?php

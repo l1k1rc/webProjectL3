@@ -1,6 +1,6 @@
 <?php
 function connectionDB(){
-		$dbconn = pg_connect("dbname=dbraphael host=localhost user=raphael password=raphaoul13")
+		$dbconn = pg_connect("dbname=dbprojet host=localhost user=julien password=abc")
 	    or die('Connexion impossible : ' . pg_last_error());
 
 	    return $dbconn;

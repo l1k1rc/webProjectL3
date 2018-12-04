@@ -50,44 +50,37 @@
 	function displayForTheSecondChoice(){
 		echo '              <div class="content" style="">
                 <div id="serieOption1">
-                    <form action="" method="post" enctype="multipart/form-data">
-                      <label for="brand">Marque :</label><br />
-                       <select name="brand" id="brand">
-                           <option value="1frr">Ferrari</option>
-                           <option value="2kng">Koenigsegg</option>
-                           <option value="3msr">Maserati</option>
-                           <option value="4bmw">BMW</option>
-                           <option value="5vlk">Volkswaggen</option>
-                           <option value="6adi">Audi</option>
-                           <option value="7pgt">Peugeot</option>
-                      </select> 
+                    <form action="carpoolResult.php" method="post" enctype="multipart/form-data">
+                      <br />
+                      <label for="type">Type de voiture recherché :</label><br />
+                        <select name="type" id="type">
+                           <option value="citadine">Citadine</option>
+                           <option value="hypercar">Hypercar</option>
+                           <option value="sportive">Sportive</option>
+                           <option value="SUV">SUV</option>
+                           <option value="berline">Berline</option>
+                           <option value="cabriolet">Cabriolet</option>
+                        </select>
                       <br />
                       <label for="station">Station de départ :</label>
-                      <select name="station" id="station">
-                           <option value="Lle">Lille</option>
-                           <option value="Pa">Paris</option>
-                           <option value="Br">Brest</option>
-                      </select> 
+                      <input type=text" id="station" name="station"/>
                       <br />
-                       <label for="pricePerDay">Prix en euro par jour :</label>
-                       <input type="range" id="pricePerDay" name="pricePerDay" min="10" max="100" id="pricePerDay"/>
-                      <br />
-                    </form>
+                       <label for="price">Prix du voyage :</label>
+                       <input type="range" id="price" name="price" min="10" max="1000"/>
                 </div>
                 <div id="serieOption2">
-                    <form method="post" action="traitement.php">
-                       <label for="nbrPerson">Nombre de personne</label>
-                       <input type="number" id="nbrPerson" name="nbrPerson" min="1" max="5" />
+                       <label for="places">Nombre de personne</label>
+                       <input type="number" id="places" name="places" min="1" max="7" />
                        <br />
                        <label for="dst">Destination :</label><br />
                        <input type="text" name="dst" id="dst" required="required">
                       <br />
-                    </form>
                 </div>
-                <form method="post" action="rentalResult.php">
-                       <input type="submit" id="valid" name="valid"/>
+                       <input type="submit" id="validcs" name="validcs"/>
                 </form>
             </div>';
+
+            
 	}
 	/*Allows to read a csv file and get each value*/
     function readCSVFile(){
