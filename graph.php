@@ -1,6 +1,9 @@
 <?php // content="text/plain; charset=utf-8"
 require_once ('./src/jpgraph.php');
 require_once ('./src/jpgraph_line.php');
+require('connectDatabase.php');
+
+
 	$datay1 = array(20,15,23,15);
 	$datay2 = array(12,9,42,8);
 	$datay3 = array(5,17,32,24);
@@ -12,7 +15,7 @@ require_once ('./src/jpgraph_line.php');
 	$theme_class=new UniversalTheme;
 
 	$graph->SetTheme($theme_class);
-	$graph->img->SetAntiAliasing(false);
+	$graph->img->SetAntiAliasing(true);
 	$graph->title->Set('Filled Y-grid');
 	$graph->SetBox(false);
 

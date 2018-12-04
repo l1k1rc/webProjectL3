@@ -2,6 +2,26 @@
   if(empty($_SESSION['login'])){
     header('location: index.php');
   }
+    $dbconn=connectionDB();
+  $brand=array();
+  $nbrOnSite=array();
+  $req=pg_query("SELECT brandrent, COUNT(*) FROM rent GROUP BY brandrent;");
+  $countB=0;
+  $countN=0;
+  while ($l = pg_fetch_array($req,null,PGSQL_ASSOC)){
+      $i=0;
+        foreach ($l as $val) {
+          if($i==0){
+            $brand[$countB]=$val;
+            $countB++;
+          }
+          else{
+            $nbrOnSite[$countN]=$val;
+            $countN++;
+          }
+          $i++;
+        }
+  }
 ?>
 <!DOCTYPE html>
 <html lang="fr">

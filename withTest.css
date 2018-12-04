@@ -538,6 +538,7 @@ a{color: tomato;}
   width: 47%;
   float: left;
   margin-bottom: 100px;
+  border-right: 1px solid white;
 }
 #rightSide{
   width: 47%;

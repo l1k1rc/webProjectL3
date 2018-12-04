@@ -1,5 +1,4 @@
-<?php require('displayFunctions.php'); 
-ini_set("display_errors",0);error_reporting(0);?>
+<?php require('displayFunctions.php'); ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -24,22 +23,14 @@ ini_set("display_errors",0);error_reporting(0);?>
             ?>
             <div id="transact_info">
               <div id="leftSide">
-                <h3>Informations  :</h3>
-                <form action="transaction.php" method="post">
-                  <label for="tsct_email">Email :</label>
-                  <input type="email" name="tsct_email"><br />
-                  <label for="tsct_name">Nom :</label>
-                  <input type="text" name="tsct_name"><br />
-                  <label for="tsct_surname">Prénom :</label>
-                  <input type="text" name="tsct_surname"><br />
-                  <label for="tsct_adresse">Adresse de facturation :</label>
-                  <input type="text" name="tsct_adresse"><br />
-                  <input type="submit" name="tsct_valid" value="Valider la transaction"><br />
-                </form>
+                <h3>Informations acheteur  :</h3>
+                <?php infoSession(); ?>
               </div>
               <div id="rightSide">
-                
+                <h3>Informations achat :</h3><br >
+                <?php echo infoAchat(); ?>
               </div>
+              <?php validRent(); ?>
             </div>
     </div>
 </div>
