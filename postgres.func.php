@@ -40,7 +40,7 @@
 						$i++;
 				}
 				$tab.="</p>"; // se référer au commentaire en haut pour les indices
-				$tab.="<img src='".$pseudo[0]."' style='box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'>";
+				$tab.="<img src='".$pseudo[0]."' alt='' style='box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'>";
 				$tab.="<p class='userProfilAccess'>Utilisateur : <a href='profil.php?ident=".$pseudo[8]."'>".$pseudo[8]."</a></p>";
 				$tab.= "<a href='detailedAnnounce.php?psd=".$pseudo[1]."' class='getProfil'>Voir annonce</a>";
 				if($_SESSION['login']=='admin'){
@@ -70,7 +70,7 @@
 			}
 			$i=0;
 			$tab.="<h2>".$container[1]."</h2>";
-			$tab.="<img src='".$container[12]."' style='box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 75%; height: 400px; margin-left: 10%;'><hr />";
+			$tab.="<img src='".$container[12]."' alt='' style='box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 75%; height: 400px; margin-left: 10%;'><hr />";
 			$tab.="<div class='details'>";
 			$tab.="<h3>Description</h3>";
 			$tab.="<p class='paraphUser'>";
@@ -104,7 +104,7 @@
 		$slider='';
         while ($l = pg_fetch_array($req,null,PGSQL_ASSOC)) {
 			foreach ($l as $val) {
-				$slider.='<img class="mySlides" src="'.$val.'" >';
+				$slider.='<img class="mySlides" src="'.$val.'" alt="">';
 			}
 		}  
 		return $slider;
@@ -122,7 +122,7 @@
 
 			foreach ($l as $val) {
 				if($i==1)
-					echo '<div class="profSide"><img src='.$val.' style="width:70px; height:70px;">';
+					echo '<div class="profSide"><img src='.$val.' alt="" style="width:70px; height:70px;">';
 				else if($i==2)
 					echo '<p>'.$val.'</p></div>';
 				else if($i==3)
@@ -327,16 +327,16 @@
 						$tab.="\t\t<b style='color:tomato; font-size:25px;'>$tabName[$i] $col_value $</b> <br />\n";
 					else if($i==8)
 						if($col_value=='f')
-							$tab.="\t\t<p style='color:green;''>Location effectuée</p>";
+							$tab.="\t\t<p style='color:green;'>Location effectuée";
 						else
-							$tab.="<p style='color:red;'>En vente...</p>";
+							$tab.="<p style='color:red;'>En vente...";
 					else
 						$tab.="\t\t$tabName[$i] $col_value <br />\n";
 				}
 				$i++;
 			}
 			$tab.="</p>"; // se référer au commentaire en haut pour les indices
-			$tab.="<img src='".$pseudo[0]."' style='margin-right : 1%; box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'>"; //".$pseudo[0]." enlevé de src
+			$tab.="<img src='".$pseudo[0]."' alt='' style='margin-right : 1%; box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'>"; //".$pseudo[0]." enlevé de src
 			
 			$tab.="<form action='profil.php' method='POST'><input type='hidden' name='rent' value='".$pseudo[2]."' ><input type='submit' name='deleteR' value='Supprimer annonce' class='getProfil' style='margin-bottom : 5%;'></form>";
 			deleteThisRent();
@@ -438,7 +438,7 @@
                      <label for="commentaryArea">
                      Laissez une appréciation pour cette location :</label>
                      <br />
-                     <textarea name="commentaryArea" id="commentaryArea" rows="5" cols="80" style="font-size: 20px; padding: 8px; font-family:"times new roman", times, sans-serif;" required="required"></textarea>
+                     <textarea name="commentaryArea" id="commentaryArea" rows="5" cols="80" style="font-size: 20px; padding: 8px;" required="required"></textarea>
                      <br /> 
                        	<input type="radio" name="estimate" value="1" required="required"> 1
  						<input type="radio" name="estimate" value="2"> 2
@@ -453,7 +453,7 @@
 	function insertComment(){
 		$dbconn=connectionDB();
 		$req=pg_query("INSERT INTO estimate (dateest,notationest,commentest,emailu,idrent,titleest) VALUES ('".dateHeure()."','".$_POST['estimate']."','".$_POST['commentaryArea']."','".$_SESSION['login']."','".$_GET['psd']."','".$_POST['title']."');");
-
+		pg_close($dbconn);
 	}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -744,6 +744,7 @@
 		$req4=pg_query("DELETE FROM historical WHERE idrent='".$val."';");
 
 		$req=pg_query("DELETE FROM rent WHERE idrent='".$val."';");
+		pg_close($dbconn);
 	}
 	/* In the select form in the index page, this function parse the database to take the brand inserted by the users */
 	function displayBrandForSelectOption(){
@@ -763,6 +764,7 @@
 			$text.='<option value="'.$val.'">'.$val.'</option>';
 		}
 		return $text;
+		pg_close($dbconn);
 	}
 	function deleteCommentary($idcom){
 		$dbconn=connectionDB();
@@ -782,6 +784,7 @@
 				$i++;
 			}
 		}
+		pg_close($dbconn);
 	}
 	function infoAchat(){
 		$dbconn=connectionDB();
@@ -809,6 +812,7 @@
 		}
 
 		return $tab;
+		pg_close($dbconn);
 	}
 	//Function to valid a rental by the user. This function update the warehouse of the user as well as the rent table to avoid to display the rental if this one is already done by the/another user.
 	function validRent(){
@@ -849,10 +853,11 @@
 				$total=$qteU-$qteR;
 				$req=pg_query("UPDATE warehouse SET balancewh = '".$total."' WHERE emailu='".$_SESSION['login']."';");
 				$req=pg_query("UPDATE rent SET possibilityrent = 'FALSE' WHERE idrent='".$_GET['psd']."';");
+
 				$validated=1;
 			}
 		}
-
+		pg_close($dbconn);
 	}
 	/*When an estimate is done */
 	if(isset($_POST['sendComment'])){

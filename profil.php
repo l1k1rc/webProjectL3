@@ -116,7 +116,7 @@
                             <br />
                             <label for="commentaryArea">Ecrivez votre message :</label>
                             <br />
-                            <textarea name="messageArea" name="messageArea" rows="5" cols="80" style="font-size: 20px; padding: 8px; font-family:"times new roman", times, sans-serif;" required="required"></textarea>
+                            <textarea name="messageArea" rows="5" cols="80" required="required"></textarea>
                             <br />
                             <input type="submit" value="Envoyer" name="envoyer" id="send_whisper" class="getProfil2">
                             <br />
