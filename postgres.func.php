@@ -850,11 +850,23 @@
 			if($qteU<$qteR){
 				echo '<p style="color:red;">Erreur : Vous n\'avez pas assez de fonds pour effectuer cet achat. Remplissez votre porte-feuille en suivant <a href="./profil.php">ce lien</a></p>';
 			}else if($qteU>=$qteR){
+				// total price pay by user who wants the rent
 				$total=$qteU-$qteR;
 				$req=pg_query("UPDATE warehouse SET balancewh = '".$total."' WHERE emailu='".$_SESSION['login']."';");
+				//decrement his warehouse
 				$req=pg_query("UPDATE rent SET possibilityrent = 'FALSE' WHERE idrent='".$_GET['psd']."';");
-
-				$validated=1;
+				//request to search the seller
+				$reqEmail=pg_query("SELECT emailu FROM rent WHERE idrent='".$_GET['psd']."';");
+				//get his email
+				$email_By=pg_fetch_array($reqEmail,null,PGSQL_ASSOC);
+				// search his warehouse
+				$reqWarehouseValue=pg_query("SELECT balancewh FROM warehouse WHERE emailu='".$email_By['emailu']."';");
+				//get it
+				$warehouseValue=pg_fetch_array($reqWarehouseValue,null,PGSQL_ASSOC);
+				// gain money for the seller
+				$moneyUpForSeller=$warehouseValue['balancewh']+$qteR;
+				// update his warehouse to get the gain
+				$reqForSeller=pg_query("UPDATE warehouse SET balancewh='".$moneyUpForSeller."' WHERE emailu='".$email_By['emailu']."'");
 			}
 		}
 	}
