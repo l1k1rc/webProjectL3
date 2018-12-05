@@ -867,6 +867,7 @@
 				$moneyUpForSeller=$warehouseValue['balancewh']+$qteR;
 				// update his warehouse to get the gain
 				$reqForSeller=pg_query("UPDATE warehouse SET balancewh='".$moneyUpForSeller."' WHERE emailu='".$email_By['emailu']."'");
+				header("Refresh:0");
 			}
 		}
 	}
