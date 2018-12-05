@@ -857,7 +857,6 @@
 				$validated=1;
 			}
 		}
-		pg_close($dbconn);
 	}
 	/*When an estimate is done */
 	if(isset($_POST['sendComment'])){
