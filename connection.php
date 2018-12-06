@@ -48,8 +48,8 @@
             border-radius:4px;
         }
     </style>
-</head>
     <link rel="icon" href="picture/iconCar.png" />
+</head>
 <body>
 <div class="pictureBackground"></div>
     <div class="ourPage">
