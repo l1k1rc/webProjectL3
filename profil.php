@@ -8,14 +8,14 @@
     <link rel="stylesheet" type="text/css" href="withTest.css" media="screen">
     <style>
         .spaceHBuy {
-            margin-left : 12%; 
+            margin-left : 9%; 
             display : inline;
             color: red;     
             font-weight: bold;
         }
 
         .spaceHRec{
-            margin-left : 52%; 
+            margin-left : 46%; 
             display : inline;
             color: red;     
             font-weight: bold;
