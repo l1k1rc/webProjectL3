@@ -338,9 +338,9 @@
 			$tab.="</p>"; // se référer au commentaire en haut pour les indices
 			$tab.="<img src='".$pseudo[0]."' alt='' style='margin-right : 1%; box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'>"; //".$pseudo[0]." enlevé de src
 			
-			$tab.="<form action='profil.php' method='POST'><input type='hidden' name='rent' value='".$pseudo[2]."' ><input type='submit' name='deleteR' value='Supprimer annonce' class='getProfil' style='margin-bottom : 5%;'></form>";
-			deleteThisRent();
-			$tab.="<a class='getProfil' href='detailedAnnounce.php?psd=".$pseudo[1]."'>Consulter annonce</a>"; 
+			$tab.="<form action='profil.php' method='POST'><input type='hidden' name='rent' value='".$pseudo[2]."' ><input type='submit' name='deleteR' value='Supprimer annonce' class='getProfil' style='margin-bottom : 5%; font-size: 13.7px;'></form>";
+				deleteThisRent();
+			$tab.="<a class='getProfil' href='detailedAnnounce.php?psd=".$pseudo[1]."' style='text-decoration:none; font-size: 16px;' >Consulter annonce</a>"; 
 			$tab.="\t</div>\n";
 		}
 		pg_free_result($result);
@@ -459,7 +459,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//														       Warehouse managment																		//
 	//																																						//
-	//					Reste à :		1)Modif css 	2)Gérer date+code cb  		3)Intéragir avec l'historique											//
+	//																																						//
 	//																																						//
 
 	//Get all bank info for warehouse page management useing
@@ -560,6 +560,7 @@
 			$result.= "</p><form action='manageWarehouse.php' method='POST' style='text-align : center ; margin-top : 1%;'><input type='text' name='newcc' style='width: 17%; height: 10px;'>";
 			$result.= "<p><input type='submit' name='reqcc' value='Modifier la carte bancaire' class='getProfil2'/></p></form>";
 
+
 		//If validate update button is press -> don't show buying money form
 		}elseif(isset($_POST['reqcc'])) {
 			//Check if format isn't ok
@@ -582,7 +583,7 @@
 				//Show new bank infos
 				$result = "<p style='text-align : center;'><b class='motImportant' style='text-align : center ;' >Carte bancaire : </b>";
 				$result.= $newcc['credit_cardbi'];
-				$result.= "<form action='manageWarehouse.php' method='POST' style='text-align : center; margin-top : 1%;'><input type='submit' name='editcc' style='background:url(/font/editbutton.png) no-repeat;' /></form></p>";
+				$result.= "<form action='manageWarehouse.php' method='POST' style='text-align : center; margin-top : 1%;'><input type='submit' name='editcc' value='Modifier' class='getProfil2'/></form></p>";
 
 				//Using saved var of buying display form
 				$result.= $buyCreditText;
@@ -670,9 +671,9 @@
 				pg_close($dbconn);
 
 				//Display new rib
-				$result = "<p style='text-align : center;'><b class='motImportant' style='text-align : center ;' >RIB : </b>";
+				$result = "<p style='text-align : center;'><b class='motImportant' style='text-align : center ; margin-top: 1%;' >RIB : </b>";
 				$result.= $newrib['ribbi'];
-				$result.= "<form action='manageWarehouse.php' method='POST' style='text-align : center; margin-top : 1%;'><input type='submit' name='editRib' style='background:url(/font/editbutton.png) no-repeat;' /></form></p>";
+				$result.= "<form action='manageWarehouse.php' method='POST' style='text-align : center; margin-top : 1%;'><input type='submit' name='editRib' class='getProfil2' value='Modifier' /></form></p>";
 
 				//Using saved var of recover display form
 				$result.= $recoverCreditText;
