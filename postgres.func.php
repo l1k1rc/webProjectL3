@@ -1050,7 +1050,7 @@
 			}else if($qteU>=$qteC){
 				// total price pay by user who wants the carpool
 				$total=$qteU-$qteC;
-				print_r($total);
+				
 				$req1=pg_query("UPDATE warehouse SET balancewh = '".$total."' WHERE emailu='".$_SESSION['login']."'");
 				//decrement his warehouse
 				$seats=$seats-1;
