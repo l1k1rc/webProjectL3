@@ -433,7 +433,7 @@
 			echo '<form method="post" action="'.$_SERVER['PHP_SELF'].'?psd='.$_GET['psd'].'" style="text-align: center;">  
                      <label for="title">Veuillez saisir le titre de votre sujet :</label>
                      <br />
-                     <input type="text" name="title" required="required">
+                     <input type="text" name="title" id="title" required="required">
                      <br />
                      <label for="commentaryArea">
                      Laissez une appréciation pour cette location :</label>
@@ -703,8 +703,8 @@
 			$containerRec[$j] = $l; 
 			$j++;		
 		}
-		echo '<h4 class="spaceHBuy">Derniers achats</h4>';
-		echo '<h4 class="spaceHRec">Derniers transferts</h4>';
+		echo '<h4 class="spaceHBuy">Dernières incrémentations</h4>';
+		echo '<h4 class="spaceHRec">Derniers décrementations</h4>';
 
 		$lim = $i-5;
 		if ($i >= $j) {
@@ -720,14 +720,14 @@
 			echo "<br />";	
 			if ($i<0){
 				$buy = '<br /><p class="spaceBuy" ></p>';
-				$rec = '<p class="spaceRec">Dépot de '.$containerRec[$j]['nbr_creditsh'].' crédits le '.$containerRec[$j]['dateh'].'</p>';
+				$rec = '<p class="spaceRec">Allégement de '.$containerRec[$j]['nbr_creditsh'].' crédits le '.$containerRec[$j]['dateh'].'</p>';
 
 			}elseif ($j<0) {
-				$buy = '<br /><p class="spaceBuy" >Achat de '.$containerBuy[$i]['nbr_creditsh'].' crédits le '.$containerBuy[$i]['dateh'].'</p>';
+				$buy = '<br /><p class="spaceBuy" >Ajout de '.$containerBuy[$i]['nbr_creditsh'].' crédits le '.$containerBuy[$i]['dateh'].'</p>';
 				$rec = '<p class="spaceRec" ></p>';
 			}else{
-				$buy = '<br /><p class="spaceBuy" >Achat de '.$containerBuy[$i]['nbr_creditsh'].' crédits le '.$containerBuy[$i]['dateh'].'</p>';
-				$rec = '<p class="spaceRec">Dépot de '.$containerRec[$j]['nbr_creditsh'].' crédits le '.$containerRec[$j]['dateh'].'</p>';
+				$buy = '<br /><p class="spaceBuy" >Ajout de '.$containerBuy[$i]['nbr_creditsh'].' crédits le '.$containerBuy[$i]['dateh'].'</p>';
+				$rec = '<p class="spaceRec">Allégement de '.$containerRec[$j]['nbr_creditsh'].' crédits le '.$containerRec[$j]['dateh'].'</p>';
 			}
 
 			echo $buy;
@@ -866,8 +866,12 @@
 				$warehouseValue=pg_fetch_array($reqWarehouseValue,null,PGSQL_ASSOC);
 				// gain money for the seller
 				$moneyUpForSeller=$warehouseValue['balancewh']+$qteR;
-				// update his warehouse to get the gain
+				// update his warehouse and historical to get the gain
+				$date = date("d-m-Y");
+				pg_query("INSERT INTO historical(dateh,typeh,emailu,nbr_creditsh) VALUES ('".$date."','buyCredit','".$email_By['emailu']."','".$qteR."')") or die('Erreur dans la table historical : ' .pg_last_error());
 				$reqForSeller=pg_query("UPDATE warehouse SET balancewh='".$moneyUpForSeller."' WHERE emailu='".$email_By['emailu']."'");
+				//Update historical  for buyer
+				pg_query("INSERT INTO historical(dateh,typeh,emailu,nbr_creditsh) VALUES ('".$date."','recoverCredit','".$_SESSION['login']."','".$qteR."')") or die('Erreur dans la table historical : ' .pg_last_error());
 				
 				header("Refresh:0");
 			}
