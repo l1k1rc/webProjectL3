@@ -109,14 +109,14 @@
 
                         ?>
 
-                        <form method="post" action="profil.php" onsubmit="return sendMessage()"; style="text-align: center;">
+                        <form method="post" action="profil.php" onsubmit="return sendMessage()" style="text-align: center;">
                             <label for="dest">Veuillez saisir le destinataire de votre message :</label>
                             <br />
-                            <input type="text" name="dest" required="required">
+                            <input type="text" name="dest" id="dest" required="required">
                             <br />
-                            <label for="commentaryArea">Ecrivez votre message :</label>
+                            <label for="messageArea">Ecrivez votre message :</label>
                             <br />
-                            <textarea name="messageArea" rows="5" cols="80" required="required"></textarea>
+                            <textarea name="messageArea" id="messageArea" rows="5" cols="80" required="required"></textarea>
                             <br />
                             <input type="submit" value="Envoyer" name="envoyer" id="send_whisper" class="getProfil2">
                             <br />
