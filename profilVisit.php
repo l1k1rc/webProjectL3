@@ -16,6 +16,9 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
+        .marge{
+            margin-bottom: 1%;
+        }
     </style>
     <link rel="icon" href="pictures/iconCar.png" />
 </head>
@@ -38,14 +41,14 @@
                 <?php
                 //Profil infos collect
                 $array_profil = profilVisitDisplay($_GET['emailvisit']);
-                echo "<p style='font-family: MANIFESTO, sans-serif; font-size: 40px; text-align: center; color: tomato;'>- Profil -</p>
-                <center><img src=".$array_profil[6]['profilimgu']." style='  box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 150px; height: 150px; margin-left:auto; margin-right:auto;''></center>
+                echo "<h2 class='marge' >- Profil -</h2>
+                <p style='text-align: center;'><img src=".$array_profil[6]['profilimgu']." alt='' style='box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 150px; height: 150px; margin-left:auto; margin-right:auto;'></p>
                 <div class='compartments'>
-                	  <p style='font-family: MANIFESTO, sans-serif; font-size: 20px; text-align: center; color: tomato; margin-bottom: 15px;'>Details du profil</p>
-                    <p class='descriptionAnnounceBis' style='top: 30%;'><b class='motImportant' >Email :</b> ".$array_profil[0]['emailu']."<br /><b class='motImportant' >Nom :</b> ".$array_profil[1]['nameu']." <br /><b class='motImportant' >Prenom :</b> ".$array_profil[2]['surnameu']." <br /> <b class='motImportant' >Age :</b> ".$array_profil[3]['ageu']." <br /><b class='motImportant' >Genre :</b> ".$array_profil[4]['gender']." <br /><b class='motImportant' >Téléphone :</b> ".$array_profil[5]['phoneu']."</p>
-                </div>"
+                      <h3 class='marge'>Details du profil</h3>
+                    <p class='descriptionAnnounceBis' style='top: 30%;'><b class='motImportant' >Email :</b> ".$array_profil[0]['emailu']."<br /><b class='motImportant' >Nom :</b> ".$array_profil[1]['nameu']." <br /><b class='motImportant' >Prenom :</b> ".$array_profil[2]['surnameu']." <br /> <b class='motImportant' >Age :</b> ".$array_profil[3]['ageu']." <br /><b class='motImportant' >Genre :</b> ".$array_profil[4]['gender']." <br /><b class='motImportant' >Téléphone :</b> ".$array_profil[5]['phoneu']."</p>"
                 ?>
             </div>
+    </div>
     </div>
 </div>
 </body>
