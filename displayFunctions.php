@@ -247,7 +247,7 @@
           $msg=str_replace("'","[\quote]",$_POST['messageArea']);
 
           //insertion du message dans la base de donnée
-          $req1=pg_query($db,"INSERT INTO whisper (idwhisper,messagewhisp,datewhisp,srcwhisp,dstwhisp,emailu,ida) VALUES ('".$val."','".$msg."','".dateHeure()."','".$_SESSION['login']."','".$_POST['dest']."','".$_SESSION['login']."','1');");
+          $req1=pg_query($db,"INSERT INTO whisper (idwhisper,messagewhisp,datewhisp,srcwhisp,dstwhisp,emailu) VALUES ('".$val."','".$msg."','".dateHeure()."','".$_SESSION['login']."','".$_POST['dest']."','".$_SESSION['login']."');");
 
           closeDB($db);
 
