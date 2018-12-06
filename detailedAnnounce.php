@@ -83,7 +83,7 @@
               </script>
               <?php
                 if(!empty($_SESSION['login'])){ 
-                 echo "<form action='transaction.php?psd=".$_GET['psd']."'' method='post' style='text-align: center;'>
+                 echo "<form action='transaction.php?psd=".$_GET['psd']."' method='post' style='text-align: center;'>
                   <input type='hidden' name='submitRent-1' value='".$_GET['psd']."'>
                   <input type='submit' name='submitRent-2' value='Effectuer la location'>
                 </form>";
