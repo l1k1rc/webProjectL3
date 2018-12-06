@@ -1,6 +1,5 @@
 <?php 
 	session_start();
-
 	require('connectDatabase.php');
 	/*Allows  to display each division with their compartments after the filter in he home page */
 	function searchByFilter(){
@@ -50,13 +49,11 @@
 			}
 			pg_free_result($result);
 			pg_close($dbconn);
-
 			return $tab;
 	 	}
 	}
 	/* Allow to display the detailed part having clicked on the button beside an announce, this part display the entire description of the selected rent*/
 	function displayDetailedPart($idRent){
-
 		$dbconn=connectionDB();
 		$nameCol=array('Type : ', 'nom : ', 'série : ', 'marque : ', 'Nombre de siège : ', 'Prix : ', 'Transmission : ', 'Puissance moteur : ', 'Type carburant : ', 'Nombre de portes : ', 'Description : ', 'Contact : ');
 		$tab=''; 
@@ -82,9 +79,54 @@
 			}
 			$tab.="</p>";
 		}
+		return $tab;
+	}
+
+	function displayDetailedPartCS($idcarshare){
+
+		$dbconn=connectionDB();
+		$nameCol=array('Type :', 'Nom :', 'Point de départ :', 'Destination :', 'Nombre de places :', 'Description :', 'Prix :', 'Contact :');
+		$tab=''; 
+		$container=array();
+		$result=pg_query("SELECT typecs,title,departure,destination,nbr_seatcs,descriptioncs,pricecs,emailu,path_photofiles FROM carshare INNER JOIN filecs ON carshare.idcarshare=filecs.idcarshare WHERE carshare.idcarshare='".$idcarshare."';") or die(pg_last_error());
+		while($l = pg_fetch_array($result,null,PGSQL_ASSOC)){
+			$i=0;
+			foreach ($l as $val) {  // on fait ce premier forEach pour stocker les valeurs de la ligne dans un tableau container pour pouvoir l'utiliser sur le début de la description HTML
+				$container[$i]=$val;
+				$i++;
+			}
+			$i=0;
+			$container[1]=str_replace("[\quote]","'",$container[1]);
+			$tab.="<h2>".$container[1]."</h2>";
+			$tab.="<img src='".$container[8]."' style='box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 75%; height: 400px; margin-left: 10%;'><hr />";
+			$tab.="<div class='details'>";
+			$tab.="<h3>Description</h3>";
+			$tab.="<p class='paraphUser'>";
+			foreach ($l as $val) { // enfin, cette 2ème boucle pour l'intérieur de la description HTML
+				if($i<8){ // le 8ème est le chemin path image
+					if($i==6){
+						$tab.="<u>$nameCol[$i]</u> $val € <br />";
+					}
+					elseif($i==5){
+						$val=str_replace("[\quote]","'",$val);
+						$tab.="<u>$nameCol[$i]</u> $val <br />";
+					}
+					elseif($i==1){
+						$val=str_replace("[\quote]","'",$val);
+						$tab.="<u>$nameCol[$i]</u> $val <br />";
+					}
+					else{
+						$tab.="<u>$nameCol[$i]</u> $val <br />";
+					}
+				}
+				$i++;
+			}
+			$tab.="</p>";
+		}
 
 		return $tab;
 	}
+
 	/* Count the number of picture for the part slide of the detailedPart */
 	function numberOfPictureForThisRent(){
 		$dbconn=connectionDB();
@@ -109,6 +151,19 @@
 		}  
 		return $slider;
 	}
+
+	function getPicturesForCarpool(){
+		$dbconn=connectionDB();
+		$req=pg_query("SELECT path2photofiles FROM filecs2 WHERE idcarshare='".$_GET['psd']."' ;");
+		$slider='';
+        while ($l = pg_fetch_array($req,null,PGSQL_ASSOC)) {
+			foreach ($l as $val) {
+				$slider.='<img class="mySlides" src="'.$val.'" >';
+			}
+		}  
+		return $slider;
+	}
+
 	/* Allow to display the comment part from the estimate table DB */
 	function displayCommentInDetailedPart(){
 		$comment='';
@@ -119,20 +174,25 @@
 			$i=1;
 			$idcom='';
 			echo '<div class="compartments">';
-
 			foreach ($l as $val) {
 				if($i==1)
 					echo '<div class="profSide"><img src='.$val.' alt="" style="width:70px; height:70px;">';
-				else if($i==2)
+				else if($i==2){
+					$val = str_replace("[/quote]","'",$val);
 					echo '<p>'.$val.'</p></div>';
+				}
 				else if($i==3)
 					echo '<div class="comSide"> <p class="notation">'.notation($val).'</p>';
-				else if($i==4)
+				else if($i==4){
+					$val = str_replace("[/quote]","'",$val);
 					echo '<h4>'.$val.'</h4>';
+				}
 				else if($i==5)
 					echo '<p class="date">'.$val.'</p>';
-				else if($i==6)
+				else if($i==6){
+					$val = str_replace("[/quote]","'",$val);
 					echo '<p class="comment"><br />'.$val.'</p></div>';
+				}
 				else if($i==7)
 					$idcom=$val;
 				$i++;
@@ -143,7 +203,6 @@
 			echo '</div>';
 		}
 	}
-
 	//Regex of autorized characters
 	function autorizedChar($strchain, $index){
 		//name/surname
@@ -151,7 +210,6 @@
 		//Phone number/age
 		elseif ($index==1)	return preg_match('/^[0-9]{1,}$/', $strchain);
 	}
-
 	//Bunch of sql requests to update profil user (with restrictions)
 	function profilEdition($id){
 		//Mistakes shown to user in order to adapt requests
@@ -245,14 +303,12 @@
 				if ($_POST['newemail'] != ""){
 				pg_query("UPDATE users SET emailu='".$_POST['newemail']."' WHERE phoneu='".$_POST['newtel']."' ") or die('Erreur dans la table users');
 			}*/
-
 			pg_close($dbconn);
 			//No error then redirect
 			if ($sizeError == "") $sizeError = 'null';
 		}
 		return $sizeError;
 	}
-
 	//Upload in fils and db à new profil picture for profil user
 	function profilImgUpload($id) {
 		//Mistakes shown to user in order to adapt requests
@@ -290,7 +346,6 @@
 		}
 		return $containError;
 	}
-
 	//Display active rent on user page
 	function profilUserRentDisplay($id){
 		$tab='';
@@ -306,9 +361,7 @@
 					$k++;
 				}
 		}
-
 		/* INDICE $I in the loop  :::::  0 = path, 1 = idrent, 2 = namerent, 3 = brandrent, 4 = gearboxrent, 5 = typerent, 6 = nbr_seatrent, 7 = pricerent, 8 = emailu  */
-
 		$tabName=array('','','','Marque : ', 'Transmission : ', 'Catégorie : ', 'Nombre de sièges : ',' ' );
 		$result=pg_query("SELECT path_photofiles,rent.idrent,namerent,brandrent,gearboxrent,typerent,nbr_seatrent,pricerent,possibilityrent FROM rent INNER JOIN files ON rent.idrent=files.idrent WHERE emailu='".$id."'") or die('Aucun résultat.');
 		while ($line = pg_fetch_array($result,null,PGSQL_ASSOC)) {
@@ -321,8 +374,10 @@
 				if($i>1){//////////////////////////// J'AI MIS A 1
 					if($i==9) // on arrête la boucle à 8 pour éviter l'affichage du pseudo dans la description mais on empêche pas l'itération précédente
 						break;
-					else if($i==2)
+					else if($i==2){
+						$col_value=str_replace("[\quote]", "'", $col_value);
 						$tab.="\t\t<b>$tabName[$i] $col_value</b><br /> <br />\n";
+					}
 					else if($i==7)
 						$tab.="\t\t<b style='color:tomato; font-size:25px;'>$tabName[$i] $col_value $</b> <br />\n";
 					else if($i==8)
@@ -345,10 +400,8 @@
 		}
 		pg_free_result($result);
 		pg_close($dbconn);
-
 		return $tab;
 	}
-
 	//Delete a rent on profil page
 	function deleteThisRent(){
 		if(isset($_POST['deleteR'])){
@@ -360,29 +413,22 @@
 			header("Refresh:0; url=profil.php");						
 		}
 	}
-
 	//Display of own profil user page (from rentalResult.php)
 	function profilVisitDisplay($emailvisit){
       $dbconn =connectionDB();
       //Simple collect of user infos
       $req = pg_query("SELECT emailu FROM users WHERE emailu='".$emailvisit."'") or die('Échec de la requête : ' . pg_last_error());
       $array[0] = pg_fetch_array($req, null, PGSQL_ASSOC);
-
       $req = pg_query("SELECT nameu FROM users WHERE emailu='".$emailvisit."'") or die('Échec de la requête : ' . pg_last_error());
       $array[1] = pg_fetch_array($req, null, PGSQL_ASSOC);
-
       $req = pg_query("SELECT surnameu FROM users WHERE emailu='".$emailvisit."'") or die('Échec de la requête : ' . pg_last_error());
       $array[2] = pg_fetch_array($req, null, PGSQL_ASSOC);
-
       $req = pg_query("SELECT ageu FROM users WHERE emailu='".$emailvisit."'") or die('Échec de la requête : ' . pg_last_error());
       $array[3] = pg_fetch_array($req, null, PGSQL_ASSOC);
-
       $req = pg_query("SELECT gender FROM users WHERE emailu='".$emailvisit."'") or die('Échec de la requête : ' . pg_last_error());
       $array[4] = pg_fetch_array($req, null, PGSQL_ASSOC);
-
       $req = pg_query("SELECT phoneu FROM users WHERE emailu='".$emailvisit."'") or die('Échec de la requête : ' . pg_last_error());
       $array[5] = pg_fetch_array($req, null, PGSQL_ASSOC);
-
       $req = pg_query("SELECT profilimgu FROM users WHERE emailu='".$emailvisit."'") or die('Échec de la requête : ' . pg_last_error());
       $array[6] = pg_fetch_array($req, null, PGSQL_ASSOC);
       if ($array[6]['profilimgu'] == "") $array[6]['profilimgu'] = "./pictures/photo_profil/default.png";
@@ -455,38 +501,29 @@
 		$req=pg_query("INSERT INTO estimate (dateest,notationest,commentest,emailu,idrent,titleest) VALUES ('".dateHeure()."','".$_POST['estimate']."','".$_POST['commentaryArea']."','".$_SESSION['login']."','".$_GET['psd']."','".$_POST['title']."');");
 		pg_close($dbconn);
 	}
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//														       Warehouse managment																		//
 	//																																						//
 	//																																						//
 	//																																						//
-
 	//Get all bank info for warehouse page management useing
 	function getBankingInformations($id){
    		$dbconn =connectionDB();
     	//Simple collect of user infos
       	$req = pg_query("SELECT balancewh FROM warehouse WHERE emailu='".$id."'") or die('Échec de la requête : ' . pg_last_error());
       	$array[0] = pg_fetch_array($req, null, PGSQL_ASSOC);
-
       	$req = pg_query("SELECT credit_cardbi FROM bankinginformations WHERE emailu='".$id."'") or die('Échec de la requête : ' . pg_last_error());
       	$array[1] = pg_fetch_array($req, null, PGSQL_ASSOC);
-
       	$req = pg_query("SELECT ribbi FROM bankinginformations WHERE emailu='".$id."'") or die('Échec de la requête : ' . pg_last_error());
       	$array[2] = pg_fetch_array($req, null, PGSQL_ASSOC);
-
       	$req = pg_query("SELECT emailu FROM bankinginformations WHERE emailu='".$id."'") or die('Échec de la requête : ' . pg_last_error());
       	$array[3] = pg_fetch_array($req, null, PGSQL_ASSOC);
-
       	$req = pg_query("SELECT credit_card_expbi FROM bankinginformations WHERE emailu='".$id."'") or die('Échec de la requête : ' . pg_last_error());
       	$array[4] = pg_fetch_array($req, null, PGSQL_ASSOC);
-
       	$req = pg_query("SELECT credit_card_codebi FROM bankinginformations WHERE emailu='".$id."'") or die('Échec de la requête : ' . pg_last_error());
       	$array[5] = pg_fetch_array($req, null, PGSQL_ASSOC);
-
       	pg_close($dbconn);
       	return $array;
-
     }
 	
 	//Buy credit with credit card
@@ -515,7 +552,6 @@
 					$currentCredit = pg_fetch_array($req, null, PGSQL_ASSOC);
 					$newCredit = ($currentCredit['balancewh']+$_POST['buynbr']);
 					pg_query("UPDATE warehouse SET balancewh='".$newCredit."' WHERE emailu='".$id."' ") or die('Erreur dans la table warehouse : ' .pg_last_error());
-
 					//Update historical table
 					$date = date("d-m-Y");
 					pg_query("INSERT INTO historical(dateh,typeh,emailu,nbr_creditsh) VALUES ('".$date."','buyCredit','".$id."','".$_POST['buynbr']."')") or die('Erreur dans la table historical : ' .pg_last_error());
@@ -531,7 +567,6 @@
 		}
 		return $sizeError;
 	}
-
 	//Update credit card informations 
 	function changeCreditCard($array_bi){
 		//Create a save var of the update display to use it later
@@ -542,15 +577,12 @@
 		$updateText.= "<p style='text-align : center;'><b class='motImportant' style='text-align : center ;' >Cryptogramme visuel : </b>";
 		$updateText.= $array_bi[5]['credit_card_codebi'];*/
 		$updateText.= "</p><form action='manageWarehouse.php' method='POST' style='text-align : center ; margin-top : 1%;'><input type='submit' name='editcc' value='Modifier' class='getProfil2'/></form>";
-
 		//Create a save var of the buy credit display to use it later
 		$buyCreditText = "<form action='manageWarehouse.php' method='POST' style='text-align : center; margin-top : 1%;'>";
 		$buyCreditText.= "<input type='text' name='buynbr' style='width: 11%; height: 10px; margin-left: 26px; margin-right: 2px;'>€";
 		$buyCreditText.= "<input type='submit' name='reqbuymoney' value='Acheter du crédit' class='getProfil2' style='margin-left : 2%;' /></form>";
-
 		//Using update display saved
 		$result = $updateText; 
-
 		//If edit button is press, ubdate display
 		if(isset($_POST['editcc'])){
 			//Show the actual credit card informations
@@ -559,8 +591,6 @@
 			//Form for new banc informations
 			$result.= "</p><form action='manageWarehouse.php' method='POST' style='text-align : center ; margin-top : 1%;'><input type='text' name='newcc' style='width: 17%; height: 10px;'>";
 			$result.= "<p><input type='submit' name='reqcc' value='Modifier la carte bancaire' class='getProfil2'/></p></form>";
-
-
 		//If validate update button is press -> don't show buying money form
 		}elseif(isset($_POST['reqcc'])) {
 			//Check if format isn't ok
@@ -569,7 +599,6 @@
 				$result = "<p style='text-align: center; font-weight: bold; color: red; margin-bottom : 1%;'>Erreur: Numéro de carte incorrect</p>";
 				//Using saved init text
 				$result.= $updateText;
-
 				//Using saved var of buying display form
 				$result.= $buyCreditText;
 			}else{
@@ -579,12 +608,10 @@
 				$req = pg_query("SELECT credit_cardbi FROM bankinginformations WHERE emailu='".$array_bi[3]['emailu']."'") or die('Échec de la requête : ' . pg_last_error());
 				$newcc = pg_fetch_array($req, null, PGSQL_ASSOC);
 				pg_close($dbconn);
-
 				//Show new bank infos
 				$result = "<p style='text-align : center;'><b class='motImportant' style='text-align : center ;' >Carte bancaire : </b>";
 				$result.= $newcc['credit_cardbi'];
 				$result.= "<form action='manageWarehouse.php' method='POST' style='text-align : center; margin-top : 1%;'><input type='submit' name='editcc' value='Modifier' class='getProfil2'/></form></p>";
-
 				//Using saved var of buying display form
 				$result.= $buyCreditText;
 			} 
@@ -592,10 +619,8 @@
 			//Using saved var of buying display form
 			$result.= $buyCreditText;
 		}
-
 		return $result;
 	}
-
 	//Recover credits on own bank account
 	function getMoneyBack($id){
 		$result = '';
@@ -611,14 +636,11 @@
 				$dbconn =connectionDB();
 				$req = pg_query("SELECT balancewh FROM warehouse WHERE emailu='".$id."'") or die('Échec de la requête : ' . pg_last_error());
 				$currentCredit = pg_fetch_array($req, null, PGSQL_ASSOC);
-
 				pg_query("UPDATE warehouse SET balancewh=0 WHERE emailu='".$id."' ") or die('Erreur dans la table warehouse');	
-
 				//Update historical value
 				$date = date("d-m-Y");
 				pg_query("INSERT INTO historical(dateh,typeh,emailu,nbr_creditsh) VALUES ('".$date."','recoverCredit','".$id."','".$currentCredit['balancewh']."')") or die('Erreur dans la table historical : ' .pg_last_error());
 				pg_close($dbconn);
-
 				//Show precess worked to user
 				$result = "<p style='text-align: center; font-weight: bold; color: red; margin-bottom : 1%;'>Votre crédit a bien été transféré sur votre compte bancaire</p>";
 			}else{
@@ -628,20 +650,16 @@
 		}
 		return $result;
 	}
-
 	//Update rib informations 
 	function changeRib($array_bi){
 		//Create a save var of the update display to use it later
 		$updateText = "<p style='text-align : center; margin-top: 1%;'><b class='motImportant' style='text-align : center ;' >RIB : </b>";
 		$updateText.= $array_bi[2]['ribbi'];
 		$updateText.= "</p><form action='manageWarehouse.php' method='POST' style='text-align : center ; margin-top : 1%;'><input type='submit' name='editRib' class='getProfil2' value='Modifier' /></form>";
-
 		//Create a save var of the recover display to use it later
 		$recoverCreditText =  "<form action='manageWarehouse.php' method='POST' style='text-align : center; margin-top : 1%;'><input type='submit' name='moneyback' value='Retirer son crédit' class='getProfil2'/></form>";
-
 		//Using update display saved
 		$result = $updateText;
-
 		//If edit button is press, ubdate display
 		if(isset($_POST['editRib'])){
 			//Display rib update showed
@@ -656,10 +674,8 @@
 			if((strlen($_POST['newrib']) != 23) || (autorizedChar($_POST['newrib'], 1) == 0)){
 				//Show error to user
 				$result = "<p style='text-align: center; font-weight: bold; color: red; margin-bottom : 1%;'>Erreur: Format du RIB incorrect</p>";
-
 				//Using saved init text
 				$result.= $updateText;
-
 				//Using saved var of recover display form
 				$result.= $recoverCreditText;
 			}else{
@@ -669,12 +685,10 @@
 				$req = pg_query("SELECT ribbi FROM bankinginformations WHERE emailu='".$array_bi[3]['emailu']."'") or die('Échec de la requête : ' . pg_last_error());
 	      		$newrib = pg_fetch_array($req, null, PGSQL_ASSOC);
 				pg_close($dbconn);
-
 				//Display new rib
 				$result = "<p style='text-align : center;'><b class='motImportant' style='text-align : center ; margin-top: 1%;' >RIB : </b>";
 				$result.= $newrib['ribbi'];
 				$result.= "<form action='manageWarehouse.php' method='POST' style='text-align : center; margin-top : 1%;'><input type='submit' name='editRib' class='getProfil2' value='Modifier' /></form></p>";
-
 				//Using saved var of recover display form
 				$result.= $recoverCreditText;
 			}
@@ -687,7 +701,6 @@
 	//																																								//
 	//															warehouse managment end																				//
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 	//Get last transacitons in warehouse
 	function getHistoricalWarehouse($id){
 		$dbconn = connectionDB();
@@ -705,14 +718,12 @@
 		}
 		echo '<h4 class="spaceHBuy">Dernières incrémentations</h4>';
 		echo '<h4 class="spaceHRec">Derniers décrementations</h4>';
-
 		$lim = $i-5;
 		if ($i >= $j) {
 			$max = $i;
 		}else{
 			$max = $j;
 		}
-
 		while(($max > $lim) && ($max > 0) ){
 			$max--;
 			$i--;
@@ -721,7 +732,6 @@
 			if ($i<0){
 				$buy = '<br /><p class="spaceBuy" ></p>';
 				$rec = '<p class="spaceRec">Allégement de '.$containerRec[$j]['nbr_creditsh'].' crédits le '.$containerRec[$j]['dateh'].'</p>';
-
 			}elseif ($j<0) {
 				$buy = '<br /><p class="spaceBuy" >Ajout de '.$containerBuy[$i]['nbr_creditsh'].' crédits le '.$containerBuy[$i]['dateh'].'</p>';
 				$rec = '<p class="spaceRec" ></p>';
@@ -729,13 +739,11 @@
 				$buy = '<br /><p class="spaceBuy" >Ajout de '.$containerBuy[$i]['nbr_creditsh'].' crédits le '.$containerBuy[$i]['dateh'].'</p>';
 				$rec = '<p class="spaceRec">Allégement de '.$containerRec[$j]['nbr_creditsh'].' crédits le '.$containerRec[$j]['dateh'].'</p>';
 			}
-
 			echo $buy;
 			echo $rec;		
 		}
 		pg_close($dbconn);
 	}
-
 	/* Allow to the admin to delete a rent if this one doesn't respect the site rules */
 	function deleteARent($val){
 		$dbconn=connectionDB();
@@ -743,7 +751,6 @@
 		$req2=pg_query("DELETE FROM file2 WHERE idrent='".$val."';");
 		$req3=pg_query("DELETE FROM estimate WHERE idrent='".$val."';");
 		$req4=pg_query("DELETE FROM historical WHERE idrent='".$val."';");
-
 		$req=pg_query("DELETE FROM rent WHERE idrent='".$val."';");
 		pg_close($dbconn);
 	}
@@ -767,6 +774,68 @@
 		return $text;
 		pg_close($dbconn);
 	}
+
+	function searchByFilterCarpool(){
+		$tab='';
+		$pseudo=array(); // va prendre les images associées, les pseudos, et idrent (=psd)
+		if(isset($_POST['validcs'])){
+			$dbconn=connectionDB();
+			$picturesCarpool=array(); 
+			$k=0;
+			$searchPhoto=pg_query("SELECT path2photofiles FROM filecs2 INNER JOIN carshare ON carshare.idcarshare=filecs2.idcarshare") or die('Erreur dans la table File');
+			while ($l = pg_fetch_array($searchPhoto,null,PGSQL_ASSOC)) {
+				foreach ($l as $val) {
+					$picturesCarpool[$k]=$val;
+					$k++;
+				}
+			}
+
+			/* INDICE $I dans la boucle  :::::  0 = path, 1 = idcarshare, 2 = title, 3=destination, 4=departure, 5 = typecs, 6 = nbr_seatcs, 7 = pricecs, 8 = emailu  */																					
+			/*********************************************************************************************************/
+			/*$result=pg_query("SELECT path_photofiles,rent.idrent,namerent,brandrent,gearboxrent,typerent,nbr_seatrent,pricerent,emailu FROM rent INNER JOIN files ON rent.idrent=files.idrent WHERE brandRent='".$_POST['brand']."' AND gearboxRent='".$_POST['gearbox']."' AND typeRent='".$_POST['category']."' AND nbr_seatRent='".$_POST['nbrPlace']."' ;") or die('Aucun résultat.');
+			carshare.idcarchare = filecs.idcarshare
+
+			*/
+
+
+			$tabName=array('','','','Type : ', 'Nombre de place : ','Point de départ :','Destination : ' );
+			$result=pg_query("SELECT path_photofiles,carshare.idcarshare,title,typecs,nbr_seatcs,departure,destination,pricecs,emailu FROM carshare INNER JOIN filecs ON carshare.idcarshare=filecs.idcarshare WHERE nbr_seatcs>='".$_POST['places']."' AND destination='".$_POST['dst']."' AND departure='".$_POST['station']."' ;") or die('Aucun résultat.');
+			while ($line = pg_fetch_array($result,null,PGSQL_ASSOC)) {
+					$i=0; // Changer la partie IMAGE via la table 
+					$tab.="\t<div class='compartments'>";
+					$tab.="<p class='descriptionAnnounce'> ";
+					foreach ($line as $col_value) {
+						$pseudo[$i]=$col_value; // on récupère une case précise par itération, celle contenant le pseudo/nom de l'user
+						if($i>1){
+							if($i==8) // on arrête la boucle à 8 pour éviter un débordement
+								break;
+							else if($i==2){
+								$col_value= str_replace("[\quote]","'",$col_value);
+								$tab.="\t\t<b>$tabName[$i] $col_value</b><br /> <br />\n";
+							}
+							else if($i==7)
+								$tab.="\t\t<b style='color:tomato; font-size:25px;'>$tabName[$i] $col_value $</b> <br />\n";
+							else
+								$tab.="\t\t$tabName[$i] $col_value <br />\n";
+						}
+						$i++;
+				}
+				$tab.="</p>"; // se référer au commentaire en haut pour les indices
+				$tab.="<img src='".$pseudo[0]."' style='box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'>";
+				$tab.="<p class='userProfilAccess'>Utilisateur : <a href='profil.php?ident=".$pseudo[8]."'>".$pseudo[8]."</a></p>";
+				$tab.= "<a href='detailedAnnounceCS.php?psd=".$pseudo[1]."' class='getProfil'>Voir annonce</a>";
+				if($_SESSION['login']=='admin'){
+					$tab.="<form action='carpoolResult.php' method='post'><input name='idcarshare' type='hidden' value='".$pseudo[1]."'><input type='submit' name='deleteCarpool' value='DELETE' class='deleter'></form>";
+				}
+				$tab.="\t</div>\n";
+			}
+			pg_free_result($result);
+			pg_close($dbconn);
+
+			return $tab;
+	 	}
+	}
+
 	function deleteCommentary($idcom){
 		$dbconn=connectionDB();
 		$req1=pg_query("DELETE FROM estimate WHERE emailu='".$idcom."' AND idrent='".$_GET['psd']."';");
@@ -787,6 +856,24 @@
 		}
 		pg_close($dbconn);
 	}
+
+	function infoSessionCs(){
+		$dbconn=connectionDB();
+		$nameCol=array('Contact : ', 'Prénom : ', 'Nom : ');
+		$req=pg_query("SELECT profilimgu,carshare.emailu, nameu, surnameu FROM carshare INNER JOIN users ON carshare.emailu=users.emailu WHERE idcarshare='".$_GET['psd']."';") or die("Erreur dans la base de donnée");
+		$i=0;
+		while ($l = pg_fetch_array($req,null,PGSQL_ASSOC)) {
+			foreach ($l as $val) {
+				if($i==0)
+					echo '<img src="'.$val.'" alt="" style="width:70px; height:70px; margin-left:35%; margin-top:5%;"><br /><br />';
+				else
+					echo '<p>'.$nameCol[$i-1].''.$val.'</p>';
+				$i++;
+			}
+		}
+		pg_close($dbconn);
+	}
+
 	function infoAchat(){
 		$dbconn=connectionDB();
 		$nameCol=array('Type : ', 'nom : ', 'série : ', 'marque : ', 'Nombre de siège : ', 'Prix : ', 'Transmission : ', 'Puissance moteur : ', 'Type carburant : ', 'Nombre de portes : ', 'Description : ', 'Contact : ');
@@ -811,10 +898,57 @@
 			}
 			$tab.="</p>";
 		}
+		return $tab;
+		pg_close($dbconn);
+	}
+
+	function infoAchatCs(){
+		$dbconn=connectionDB();
+		$nameCol=array('Type :', 'Nom :','Nombre de siège :', 'Prix : ', 'Point de départ : ', 'Destination : ', 'Description : ', 'Contact : ');
+		$tab=''; 
+		$container=array();
+		$result=pg_query("SELECT typecs,title,nbr_seatcs,pricecs,departure,destination,descriptioncs,emailu FROM carshare WHERE idcarshare='".$_GET['psd']."';") or die("Erreur dans la base de donnée");
+		while($l = pg_fetch_array($result,null,PGSQL_ASSOC)){
+			$i=0;
+			foreach ($l as $val) {  // on fait ce premier forEach pour stocker les valeurs de la ligne dans un tableau container pour pouvoir l'utiliser sur le début de la description HTML
+				$container[$i]=$val;
+				$i++;
+			}
+			$i=0;
+			$container[1]=str_replace("[\quote]", "'", $container[1]);
+			$tab.="<h3>".$container[1]."</h3>";
+			$tab.="<div class='details'>";
+			$tab.="<p class='paraphUser'>";
+			foreach ($l as $val) { // enfin, cette 2ème boucle pour l'intérieur de la description HTML
+				if($i<8){ // le 12ème est le chemin path image
+					if($i==1){
+						$val=str_replace("[\quote]","'", $val);
+						$tab.="$nameCol[$i] $val <br />";
+					}else if($i==3){
+						$val=str_replace("[\quote]","'", $val);
+						$tab.="$nameCol[$i] $val € <br />";
+					}else if($i==4){
+						$val=str_replace("[\quote]","'", $val);
+						$tab.="$nameCol[$i] $val <br />";
+					}elseif ($i==5) {
+						$val=str_replace("[\quote]","'", $val);
+						$tab.="$nameCol[$i] $val <br />";
+					}elseif ($i==6) {
+						$val=str_replace("[\quote]","'", $val);
+						$tab.="$nameCol[$i] $val <br />";
+					}else{
+						$tab.="$nameCol[$i] $val <br />";
+					}
+				}
+				$i++;
+			}
+			$tab.="</p>";
+		}
 
 		return $tab;
 		pg_close($dbconn);
 	}
+
 	//Function to valid a rental by the user. This function update the warehouse of the user as well as the rent table to avoid to display the rental if this one is already done by the/another user.
 	function validRent(){
 		//get the boolean value of the rent for the filter
@@ -877,6 +1011,74 @@
 			}
 		}
 	}
+
+	function validCarpool(){
+		//get the boolean value of the rent for the filter
+		$req=pg_query("SELECT nbr_seatcs FROM carshare WHERE idcarshare='".$_GET['psd']."';");
+		while ($l = pg_fetch_array($req,null,PGSQL_ASSOC)) {
+				foreach ($l as $val) {
+					$seats=$val;
+				}
+			}
+		if($seats!=0){
+			echo '<form action="'.$_SERVER['PHP_SELF'].'?psd='.$_GET['psd'].'" method="post"><input type="submit" name="valid_Tr" id="valid_Tr"></form>';
+		}else{
+			echo '<p style="color:red">Plus de place disponible.</p>';
+		}
+		if(isset($_POST['valid_Tr'])){
+			$dbconn=connectionDB();
+			$result=pg_query("SELECT pricecs FROM carshare WHERE idcarshare='".$_GET['psd']."';");
+			$result2=pg_query("SELECT balancewh FROM warehouse WHERE emailu='".$_SESSION['login']."';") or die("Erreur");
+			$qteC=0;
+			$qteU=0;
+			$total=0;
+			//get the price of the carpool
+			while ($l = pg_fetch_array($result,null,PGSQL_ASSOC)) {
+				foreach ($l as $val) {
+					$qteC=$val;
+				}
+			}
+			//get the value of the warahouse's user
+			while ($l = pg_fetch_array($result2,null,PGSQL_ASSOC)) {
+				foreach ($l as $val) {
+					$qteU=$val;
+				}
+			}
+			//if the user have not enough money or not
+			if($qteU<$qteC){
+				echo '<p style="color:red;">Erreur : Vous n\'avez pas assez de fonds pour effectuer cet achat. Remplissez votre porte-feuille en suivant <a href="./profil.php">ce lien</a></p>';
+			}else if($qteU>=$qteC){
+				// total price pay by user who wants the carpool
+				$total=$qteU-$qteC;
+				print_r($total);
+				$req1=pg_query("UPDATE warehouse SET balancewh = '".$total."' WHERE emailu='".$_SESSION['login']."'");
+				//decrement his warehouse
+				$seats=$seats-1;
+				$req=pg_query("UPDATE carshare SET nbr_seatcs = '".$seats."' WHERE idcarshare='".$_GET['psd']."'");
+				//request to search the seller
+				$reqEmail=pg_query("SELECT emailu FROM carshare WHERE idcarshare='".$_GET['psd']."'");
+				//get his email
+				$email_By=pg_fetch_array($reqEmail,null,PGSQL_ASSOC);
+				// search his warehouse
+				$reqWarehouseValue=pg_query("SELECT balancewh FROM warehouse WHERE emailu='".$email_By['emailu']."'");
+				//get it
+
+				$warehouseValue=pg_fetch_array($reqWarehouseValue,null,PGSQL_ASSOC);
+				// gain money for the seller
+				
+				$moneyUpForSeller=$warehouseValue['balancewh']+$qteC;
+				// update his warehouse to get the gain
+				$reqForSeller=pg_query("UPDATE warehouse SET balancewh='".$moneyUpForSeller."' WHERE emailu='".$email_By['emailu']."'");
+
+
+				
+				header("Refresh:0");
+
+				echo '<p style="color:green;">Achat effectué</p>';
+			}
+		}
+	}
+
 	/*When an estimate is done */
 	if(isset($_POST['sendComment'])){
 		insertComment();
