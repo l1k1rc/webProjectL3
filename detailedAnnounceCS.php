@@ -83,21 +83,13 @@
               </script>
               <?php
                 if(!empty($_SESSION['login'])){ 
-                 echo "<form action='transaction.php' method='post' style='text-align: center;'>
+                 echo "<form action='transactionCs.php?psd=".$_GET['psd']."'' method='post' style='text-align: center;'>
                   <input type='hidden' name='submitCarpool-1' value='".$_GET['psd']."'>
                   <input type='submit' name='submitCarpool-2' value='Participer au covoiturage'>
                 </form>";
               }
               ?>
-              <hr />
               
-              <?php dateHeure(); ?>
-              <h3>Commentaires :</h3>
-              <?php displayCommentInDetailedPartForCarpool(); ?>
-                <br />
-              <hr />
-              <?php accessCommentCs() ?>
-              <hr />
             </div>
             
     </div>

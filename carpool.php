@@ -1,5 +1,11 @@
 <?php 
     require('registerFunctions.php');
+
+    function loclogin(){
+        if(!empty($_SESSION['login'])){
+           return '<input type="text" name="email" style="width: 300px; margin-left: 98px" required="" value="'.$_SESSION['login'].'">';
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -36,7 +42,7 @@
               }
             ?>
             <div id="resultContainer">
-                <p style="font-family: MANIFESTO, sans-serif; font-size: 40px; text-align: center; color: tomato; margin-bottom: 50px;">- Proposer une location -</p>
+                <p style="font-family: MANIFESTO, sans-serif; font-size: 40px; text-align: center; color: tomato; margin-bottom: 50px;">- Proposer un covoiturage -</p>
                 <form enctype="multipart/form-data" action="registerFunctions.php" method="POST">
                     <label id="type">Veuillez choisir la catégorie de votre voiture :</label>
                     <select name="type" style="width: 150px; margin-left: 80px">
@@ -50,25 +56,25 @@
                     </select>
                     <br />
                     <label id="titleCarPool">Veuillez saisir le titre de votre covoiturage :</label>
-                    <input type="text" name="titleCarPool" style="width: 300px; margin-left: 100px">
+                    <input type="text" name="titleCarPool" style="width: 300px; margin-left: 100px" required="">
                     <br />
                     <label id="places">Veuillez saisir le nombre de places disponible :</label>
-                    <input type="number" name="places" min="1" max="7" style="width: 300px; margin-left: 140px; height: 50px; margin-bottom: 0.2cm">
+                    <input type="number" name="places" min="1" max="7" style="width: 300px; margin-left: 140px; height: 50px; margin-bottom: 0.2cm" required="">
                     <br />
                     <label id="departure">Veuillez saisir votre point de départ :</label>
-                    <input type="text" name="departure" style="width: 300px; margin-left: 140px; height: 50px; margin-bottom: 0.2cm">
+                    <input type="text" name="departure" style="width: 300px; margin-left: 140px; height: 50px; margin-bottom: 0.2cm" required="">
                     <br />
                     <label id="destination">Veuillez saisir votre destination :</label>
-                    <input type="text" name="destination" style="width: 300px; margin-left: 140px; height: 50px; margin-bottom: 0.2cm">
+                    <input type="text" name="destination" style="width: 300px; margin-left: 140px; height: 50px; margin-bottom: 0.2cm" required="">
                     <br />
                     <label id="email">Veuillez saisir l'E-Mail lié à votre compte :</label>
-                    <input type="text" name="email" style="width: 300px; margin-left: 98px">
+                    <?php echo loclogin(); ?>
                     <br />
                     <label id="price">Veuillez saisir le prix du covoiturage :</label>
-                    <input type="text" name="price" style="margin-bottom: 100px; width: 100px; margin-left: 137px">
+                    <input type="text" name="price" style="margin-bottom: 100px; width: 100px; margin-left: 137px" required="">
                     <br />
                     <label><b>Votre photo principale:</b></label>
-                    <input type="file" accept="image/*" onchange="loadFile(event)" name="image" id="image" required="" style="margin-bottom: 1cm">
+                    <input type="file" accept="image/*" onchange="loadFile(event)" name="image" id="image" required="" style="margin-bottom: 1cm" required="">
                     <br />
                     <img id="output" style="max-width: 180px; margin-bottom: 1cm; margin-left: 5cm;" alt="" src="aaa"> 
                     <br />
@@ -132,7 +138,7 @@
                     <br />
                      <textarea name="commentaryArea" id="commentaryArea" rows="5" cols="80" style="font-size: 20px; padding: 8px; font-family:'times new roman', times, sans-serif; margin-left: 8%; margin-top: 30px"></textarea>
                     <br />
-                    <input type="submit" name="enLigne2" value="Mettre en Ligne la location" style="margin-left: 40%; margin-top: 2cm">
+                    <input type="submit" name="enLigne2" value="Mettre en Ligne le covoiturage" style="margin-left: 40%; margin-top: 2cm">
                 </form>
             </div>
         </div>
