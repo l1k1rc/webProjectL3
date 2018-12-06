@@ -2,38 +2,9 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8" />
-    <title>Rent a Car.</title>
+    <title>Rent a car.</title>
     <link rel="stylesheet" type="text/css" href="withTest.css" media="screen">
     <style>
-        .spaceHBuy {
-            margin-left : 12%; 
-            display : inline;
-            color: red;     
-            font-weight: bold;
-        }
-
-        .spaceHRec{
-            margin-left : 52%; 
-            display : inline;
-            color: red;     
-            font-weight: bold;
-        }
-
-        .spaceBuy{
-            margin-top: 1%;
-            margin-left : 6%; 
-            display : inline;
-        }
-
-        .spaceRec{
-            margin-top: 1%;
-            margin-left : 40%; 
-            display : inline;
-        }
-
-        .marge{
-            margin-bottom: 1%;
-        }
         input[type=text], input[type=password]{
             width: 100%;
             padding :12px 20px;
@@ -43,92 +14,77 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
+        input{
+          width: 100%;
+          padding :12px 20px;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
     </style>
     <link rel="icon" href="pictures/iconCar.png" />
-</head>
 <body>
-<div class="pictureBackground"></div>
-    <div class="ourPage">
+    <div class="pictureBackground"></div>
+<div class="ourPage">
     <div class="header">
             <div class="siteTitle">
-              <h1>Rent a car .</h1>
+              <h1>Rent 2 cars.</h1>
             </div>
             <div class="menu">
               <a href="index.php" class="active"><img src="pictures/home.png" alt="">&nbsp;&nbsp;&nbsp;Home</a>
               <a href="profil.php"><img src="pictures/connect.png" alt="">&nbsp;&nbsp;&nbsp;Profil</a>
               <a href="#"><img src="pictures/historical.png" alt="">&nbsp;&nbsp;&nbsp;Historique</a>
               <a href="logout.php"><img src="pictures/logout.png" alt="">&nbsp;&nbsp;&nbsp;Logout</a>
-            </div>             <div class="typeRentChoice">
-                <a href="location.php" class="a1">Proposer une location</a>
-                <a href="carpool.php" class="a2">Proposer un covoiturage</a>
+            </div>            <div class="typeRentChoice">
+                <a href="?var=v1" class="a1">Location d'un véhicule</a>
+                <a href="?var=v2" class="a2">Recherche d'un covoiturage</a>
             </div>
-            <div id="resultContainer">
-                <h2 class='marge' >- Profil -</h2>
-                <p style='text-align: center;'><img src=./pictures/photo_profil/supraccoon@gmail.com.jpg alt='' style='box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 150px; height: 150px; margin-left:auto; margin-right:auto;'></p>
-                <div class='compartments'>
-                      <h3 class='marge'>Details du profil</h3>
-                    <p class='descriptionAnnounceBis' style='top: 30%;'><b class='motImportant' >Email :</b> supraccoon@gmail.com<br /><b class='motImportant' >Nom :</b> raccoon <br /><b class='motImportant' >Prenom :</b> super <br /> <b class='motImportant' >Age :</b> 199 <br /><b class='motImportant' >Genre :</b> homme                          <br /><b class='motImportant' >Téléphone :</b> 0602039394          </p>                <input type="button" value="Editer le profil" onclick="window.location.href='profilEdit.php'" class="getProfil">
+                 <div class="content" style="">
+               <form method="post" action="rentalResult.php">                       <!-- -->
+                <div id="serieOption1">
+                      <label for="brand">Marque :</label><br />
+                       <select name="brand" id="brand" size="1">
+                            <option value="Mini">Mini</option><option value="Fiat">Fiat</option><option value="Renault">Renault</option><option value="Ford">Ford</option>
+                      </select> 
+                      <br />
+                      <label for="category">Catégorie</label>
+                       <select name="category" id="category">
+                           <option value="citadine">Citadine</option>
+                           <option value="hypercar">Hypercar</option>
+                           <option value="sportive">Sportive</option>
+                           <option value="SUV">SUV</option>
+                           <option value="berline">Berline</option>
+                           <option value="cabriolet">Cabriolet</option>
+                      </select> 
+                      <br />
+                      <label for="nbrPlace">Nombre de place</label>
+                      <input type="number" name="nbrPlace" min="1" max="7" id="nbrPlace">
+                      <br />
                 </div>
-                <div class="compartments">
-                    <h3 class="marge" >Mes annonces</h3>
-                        <div class='compartments'><p class='descriptionAnnounce'>       <b> Une voiture sympa</b><br /> <br />
-        Marque :  Renault <br />
-        Transmission :  manuelle <br />
-        Catégorie :  citadine <br />
-        Nombre de sièges :  5 <br />
-        <b style='color:tomato; font-size:25px;'>  299.9 $</b> <br />
-        <p style='color:green;'>Location effectuée</p><img src='pictures/photo_location/voiture1.jpeg' alt='' style='margin-right : 1%; box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'><form action='profil.php' method='POST'><input type='hidden' name='rent' value='Une voiture sympa' ><input type='submit' name='deleteR' value='Supprimer annonce' class='getProfil' style='margin-bottom : 5%;'></form><a class='getProfil' href='detailedAnnounce.php?psd=1'>Consulter annonce</a>  </div>
-    <div class='compartments'><p class='descriptionAnnounce'>       <b> Test</b><br /> <br />
-        Marque :  Renault <br />
-        Transmission :  manuelle <br />
-        Catégorie :  citadine <br />
-        Nombre de sièges :  5 <br />
-        <b style='color:tomato; font-size:25px;'>  299.99 $</b> <br />
-<p style='color:red;'>En vente...</p><img src='pictures/photo_location/voiture3.jpg' alt='' style='margin-right : 1%; box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'><form action='profil.php' method='POST'><input type='hidden' name='rent' value='Test' ><input type='submit' name='deleteR' value='Supprimer annonce' class='getProfil' style='margin-bottom : 5%;'></form><a class='getProfil' href='detailedAnnounce.php?psd=2'>Consulter annonce</a> </div>
-    <div class='compartments'><p class='descriptionAnnounce'>       <b> Une renault neuve</b><br /> <br />
-        Marque :  Mini <br />
-        Transmission :  manuelle <br />
-        Catégorie :  cabriolet <br />
-        Nombre de sièges :  5 <br />
-        <b style='color:tomato; font-size:25px;'>  99.99 $</b> <br />
-        <p style='color:green;'>Location effectuée</p><img src='pictures/photo_location/voiture4.jpg' alt='' style='margin-right : 1%; box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'><form action='profil.php' method='POST'><input type='hidden' name='rent' value='Une renault neuve' ><input type='submit' name='deleteR' value='Supprimer annonce' class='getProfil' style='margin-bottom : 5%;'></form><a class='getProfil' href='detailedAnnounce.php?psd=3'>Consulter annonce</a>   </div>
-    <div class='compartments'><p class='descriptionAnnounce'>       <b> Une voiture sympa</b><br /> <br />
-        Marque :  Fiat <br />
-        Transmission :  semiauto <br />
-        Catégorie :  sportive <br />
-        Nombre de sièges :  5 <br />
-        <b style='color:tomato; font-size:25px;'>  200 $</b> <br />
-<p style='color:red;'>En vente...</p><img src='pictures/photo_location/voiture1.jpeg' alt='' style='margin-right : 1%; box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'><form action='profil.php' method='POST'><input type='hidden' name='rent' value='Une voiture sympa' ><input type='submit' name='deleteR' value='Supprimer annonce' class='getProfil' style='margin-bottom : 5%;'></form><a class='getProfil' href='detailedAnnounce.php?psd=4'>Consulter annonce</a>   </div>
+                <div id="serieOption2">
+                       <label for="pricePerDay">Prix en euro par jour (maximum) :</label>
+                       <input type="range" name="priceInput" id="priceInputId" value="50" min="1" max="600" oninput="priceOutputId.value = priceInputId.value">
+                       <output name="priceOutput" id="priceOutputId">50</output><label for="priceOutputId" style="color:tomato; font-size:20px;"> $</label>
+                       <br />
+                       <label for="gearbox">Transmission:</label><br />
+                       <select name="gearbox" id="gearbox">
+                           <option value="auto">Automatique</option>
+                           <option value="manuelle">Manuelle</option>
+                           <option value="semiauto">Semi-automatique</option>
+                      </select> 
+                      <br />
+                      <label for="age">Âge du conducteur :</label>
+                      <input type="text" name="age" required="required" id="age">
+                      <br />
                 </div>
-                <div class="compartments">
-                      <h3 class="marge" >Mes covoiturages</h3>
-                </div>
-                <div class="compartments">
-                    <h3 class="marge" >Solde du compte</h3>
-                    <h4 class="spaceHBuy">Derniers achats</h4><h4 class="spaceHRec">Derniers transferts</h4><br /><br /><p class="spaceBuy" >Achat de 400 crédits le 2018-12-04</p><p class="spaceRec" ></p><br /><br /><p class="spaceBuy" >Achat de 900 crédits le 2018-12-04</p><p class="spaceRec" ></p><br /><br /><p class="spaceBuy" >Achat de 400 crédits le 2018-12-04</p><p class="spaceRec" ></p><br /><br /><p class="spaceBuy" >Achat de 300 crédits le 2018-12-04</p><p class="spaceRec" ></p><br /><br /><p class="spaceBuy" >Achat de 1000 crédits le 2018-12-02</p><p class="spaceRec" ></p>                    <p style="text-align: center;"><input type="button" value="Recharger le compte" onclick="window.location.href='./manageWarehouse.php'" class="getProfil2"></p>
-                </div> 
-                <div class="compartments">
-                        <h3 class="marge" >Messagerie</h3>
-
-                        <p><b>nematomique@orange.fr</b> <em>( Envoyé le: 2018-12-02 )</em>: Salut</p><br />
-                        <form method="post" action="profil.php" onsubmit="return sendMessage()"; style="text-align: center;">
-                            <label for="dest">Veuillez saisir le destinataire de votre message :</label>
-                            <br />
-                            <input type="text" name="dest" required="required">
-                            <br />
-                            <label for="commentaryArea">Ecrivez votre message :</label>
-                            <br />
-                            <textarea name="messageArea" rows="5" cols="80" required="required"></textarea>
-                            <br />
-                            <input type="submit" value="Envoyer" name="envoyer" id="send_whisper" class="getProfil2">
-                            <br />
-                        </form>
-                            <form method="post" action="profil.php" style="text-align: center;" id="f_prof">
-                            <br />
-                            <input type="submit" value="Supprimer les messages" name="delete" id="delete_whisper" class="getProfil2">
-                        </form>
-                                        </div>      
-            </div>
+              <input type="submit" id="valid" name="valid"/>
+                </form>                                                                <!-- -->
+            </div>           <script type="text/javascript">
+//confirm=oui ou non, prompt=scanf, alert= printf
+         
+           </script>
     </div>
 </div>
 </body>

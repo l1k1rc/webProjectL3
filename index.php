@@ -57,10 +57,6 @@ ini_set("display_errors",0);error_reporting(0);
                 displayForTheFirstChoice();// to avoid a bad posting if the $_GET variable are modified
             }
            ?>
-           <script type="text/javascript">
-//confirm=oui ou non, prompt=scanf, alert= printf
-         
-           </script>
     </div>
 </div>
 </body>

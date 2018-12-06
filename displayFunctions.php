@@ -27,7 +27,7 @@
                       <br />
                 </div>
                 <div id="serieOption2">
-                       <label for="pricePerDay">Prix en euro par jour (maximum) :</label>
+                       <label for="priceInputId">Prix en euro par jour (maximum) :</label>
                        <input type="range" name="priceInput" id="priceInputId" value="50" min="1" max="600" oninput="priceOutputId.value = priceInputId.value">
                        <output name="priceOutput" id="priceOutputId">50</output><label for="priceOutputId" style="color:tomato; font-size:20px;"> $</label>
                        <br />
