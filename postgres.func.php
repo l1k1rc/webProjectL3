@@ -41,7 +41,7 @@
 				}
 				$tab.="</p>"; // se référer au commentaire en haut pour les indices
 				$tab.="<img src='".$pseudo[0]."' alt='' style='box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'>";
-				$tab.="<p class='userProfilAccess'>Utilisateur : <a href='profil.php?ident=".$pseudo[8]."'>".$pseudo[8]."</a></p>";
+				$tab.="<p class='userProfilAccess'>Utilisateur : <a href='profilVisit.php?emailvisit=".$pseudo[8]."'>".$pseudo[8]."</a></p>";
 				$tab.= "<a href='detailedAnnounce.php?psd=".$pseudo[1]."' class='getProfil'>Voir annonce</a>";
 				if($_SESSION['login']=='admin'){
 					$tab.="<form action='rentalResult.php' method='post'><input name='idRent' type='hidden' value='".$pseudo[1]."'><input type='submit' name='deleteRent' value='DELETE' class='deleter'></form>";
