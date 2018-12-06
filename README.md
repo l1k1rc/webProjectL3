@@ -11,3 +11,4 @@ Pages validées :
 -profil 
 -rentalresult
 -CSS
+-DetailedAnnounce
