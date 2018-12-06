@@ -37,8 +37,8 @@ ini_set("display_errors",0);error_reporting(0);?>
              <div id="shoppingCart">
                     <p style="font-size: 25px; color: tomato;text-align: center;">Achat 1 : <br /><B>19,80$</B><br /> Achat 2 : <br /><B>20,20$</B></p>
               </div>
-            <input id="wallet" type="button" value="" onClick="AfficherMasquer()" />
-            <script type="text/javascript">
+            <input id="wallet" type="button" value="#" onClick="AfficherMasquer()" />
+            <script>
 
             function AfficherMasquer()
             {
