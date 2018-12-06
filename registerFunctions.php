@@ -286,31 +286,31 @@
 								$requete8 = "INSERT INTO filecs2(path2photofiles, idcarshare) VALUES ('$path3','$idcs')";
 								$result5 = pg_query($requete8) or die('ERREUR SQL : '. $requete8 . 	pg_last_error());
 		    					echo '<body onLoad="alert(\'Enregistrement du covoiturage effectué\')">';
-		    					echo '<meta http-equiv="refresh" content="0;URL=carpoolResult.php">';
+		    					echo '<meta http-equiv="refresh" content="0;URL=profil.php">';
 							}
 							else {
 								echo '<body onLoad="alert(\'Erreur extension image 3\')">';
-		    					echo '<meta http-equiv="refresh" content="0;URL=location.php">';
+		    					echo '<meta http-equiv="refresh" content="0;URL=carpool.php">';
 							}
 						}
 						else {
 							echo '<body onLoad="alert(\'Erreur extension image 2\')">';
-			    			echo '<meta http-equiv="refresh" content="0;URL=location.php">';
+			    			echo '<meta http-equiv="refresh" content="0;URL=carpool.php">';
 						}
 					}
 					else {
 						echo '<body onLoad="alert(\'Erreur extension image 1\')">';
-			    		echo '<meta http-equiv="refresh" content="0;URL=location.php">';
+			    		echo '<meta http-equiv="refresh" content="0;URL=carpool.php">';
 					}			
 				}
 				else {
 					echo '<body onLoad="alert(\'Erreur extension image principale\')">';
-			    	echo '<meta http-equiv="refresh" content="0;URL=location.php">';
+			    	echo '<meta http-equiv="refresh" content="0;URL=carpool.php">';
 				}
 			}
 			else {
 				echo '<body onLoad="alert(\'Erreur images trop volumineuses\')">';
-			    echo '<meta http-equiv="refresh" content="0;URL=location.php">';
+			    echo '<meta http-equiv="refresh" content="0;URL=carpool.php">';
 			}
 		}
 		
