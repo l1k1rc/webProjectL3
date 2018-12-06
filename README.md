@@ -14,3 +14,4 @@ Pages validées :
 -DetailedAnnounce
 -manageWarehouse
 -ProfilEdit
+-ProfilVisit
