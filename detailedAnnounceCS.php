@@ -5,7 +5,7 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8" />
-    <title>Rent a car.</title>
+    <title>Wanna Drive</title>
     <link rel="stylesheet" type="text/css" href="withTest.css" media="screen">
     <style>
         input[type=text]{
@@ -41,7 +41,7 @@
 <div class="ourPage">
     <div class="header">
             <div class="siteTitle">
-              <h1>Rent a car .</h1>
+              <h1>Wanna Drive</h1>
             </div>
             <?php displayMenu(); 
               if(!empty($_SESSION['login'])){
@@ -83,7 +83,7 @@
               </script>
               <?php
                 if(!empty($_SESSION['login'])){ 
-                 echo "<form action='transactionCs.php?psd=".$_GET['psd']."'' method='post' style='text-align: center;'>
+                 echo "<form action='transactionCs.php?psd=".$_GET['psd']."' method='post' style='text-align: center;'>
                   <input type='hidden' name='submitCarpool-1' value='".$_GET['psd']."'>
                   <input type='submit' name='submitCarpool-2' value='Participer au covoiturage'>
                 </form>";
@@ -91,6 +91,7 @@
               ?>
               
             </div>
+          </div>
             
     </div>
 </div>

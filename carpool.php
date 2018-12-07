@@ -11,7 +11,7 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8" />
-    <title>Rent a Car</title>
+    <title>Wanna Drive</title>
     <link rel="stylesheet" type="text/css" href="withTest.css" media="screen">
     <style>
         input[type=text], input[type=password]{
@@ -31,7 +31,7 @@
     <div class="ourPage">
         <div class="header">
             <div class="siteTitle">
-              <h1>Rent a car .</h1>
+              <h1>Wanna Drive</h1>
             </div>
             <?php displayMenu(); 
               if(!empty($_SESSION['login'])){
@@ -74,7 +74,7 @@
                     <input type="text" name="price" style="margin-bottom: 100px; width: 100px; margin-left: 137px" required="">
                     <br />
                     <label><b>Votre photo principale:</b></label>
-                    <input type="file" accept="image/*" onchange="loadFile(event)" name="image" id="image" required="" style="margin-bottom: 1cm" required="">
+                    <input type="file" accept="image/*" onchange="loadFile(event)" name="image" id="image" style="margin-bottom: 1cm" required="">
                     <br />
                     <img id="output" style="max-width: 180px; margin-bottom: 1cm; margin-left: 5cm;" alt="" src="aaa"> 
                     <br />
