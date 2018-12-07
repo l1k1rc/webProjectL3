@@ -2,26 +2,6 @@
   if(empty($_SESSION['login'])){
     header('location: index.php');
   }
-    $dbconn=connectionDB();
-  $brand=array();
-  $nbrOnSite=array();
-  $req=pg_query("SELECT brandrent, COUNT(*) FROM rent GROUP BY brandrent;");
-  $countB=0;
-  $countN=0;
-  while ($l = pg_fetch_array($req,null,PGSQL_ASSOC)){
-      $i=0;
-        foreach ($l as $val) {
-          if($i==0){
-            $brand[$countB]=$val;
-            $countB++;
-          }
-          else{
-            $nbrOnSite[$countN]=$val;
-            $countN++;
-          }
-          $i++;
-        }
-  }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -45,7 +25,7 @@
           margin: 8px 0;
           display: inline-block;
           border: 1px solid #ccc;
-          border-radius: 4px;¸2É
+          border-radius: 4px;
           box-sizing: border-box;
         }
     </style>
@@ -66,21 +46,17 @@
               }
             ?>
             <div id="adminPart">
+              <?php displayAdminPart();?>
               <div id="statistic">
                 <?php 
-                  echo '<img src="./graph.php" >'; 
+                  echo '<img src="./pieChart2.php" alt="">'; 
                 ?>
               </div>
               <div id="statistic2">
                 <?php 
-                  echo '<img src="./pieChart.php" >'; 
+                  echo '<img src="./pieChart.php" alt="">'; 
                 ?>
               </div>
-              
-                                      <!-- PARTIE A REMPLIR -->
-
-
-
             </div>
     </div>
 </div>
