@@ -17,3 +17,4 @@ Pages validées :
 -ProfilVisit
 -Carpool
 -DetailedAnnounceCs
+-CarpoolResult
