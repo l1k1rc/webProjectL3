@@ -98,7 +98,7 @@
 			$i=0;
 			$container[1]=str_replace("[\quote]","'",$container[1]);
 			$tab.="<h2>".$container[1]."</h2>";
-			$tab.="<img src='".$container[8]."' style='box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 75%; height: 400px; margin-left: 10%;'><hr />";
+			$tab.="<img src='".$container[8]."' style='box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 75%; height: 400px; margin-left: 10%;' alt='' ><hr />";
 			$tab.="<div class='details'>";
 			$tab.="<h3>Description</h3>";
 			$tab.="<p class='paraphUser'>";
@@ -158,7 +158,7 @@
 		$slider='';
         while ($l = pg_fetch_array($req,null,PGSQL_ASSOC)) {
 			foreach ($l as $val) {
-				$slider.='<img class="mySlides" src="'.$val.'" >';
+				$slider.='<img class="mySlides" src="'.$val.'" alt="">';
 			}
 		}  
 		return $slider;
@@ -821,7 +821,7 @@
 						$i++;
 				}
 				$tab.="</p>"; // se référer au commentaire en haut pour les indices
-				$tab.="<img src='".$pseudo[0]."' style='box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;'>";
+				$tab.="<img src='".$pseudo[0]."' style='box-shadow: 0 0 20px 0 rgba(0,0,0,0.5), 0 5px 5px rgba(0,0,0,0.5); border: black groove 4px; width: 230px; height: 150px;' alt=''>";
 				$tab.="<p class='userProfilAccess'>Utilisateur : <a href='profil.php?ident=".$pseudo[8]."'>".$pseudo[8]."</a></p>";
 				$tab.= "<a href='detailedAnnounceCS.php?psd=".$pseudo[1]."' class='getProfil'>Voir annonce</a>";
 				if($_SESSION['login']=='admin'){
