@@ -5,7 +5,7 @@ ini_set("display_errors",0);error_reporting(0);
 <html lang="fr">
 <head>
     <meta charset="utf-8" />
-    <title>Rent a car.</title>
+    <title>Wanna Drive</title>
     <link rel="stylesheet" type="text/css" href="withTest.css" media="screen">
     <style>
         input[type=text], input[type=password]{
@@ -33,7 +33,7 @@ ini_set("display_errors",0);error_reporting(0);
 <div class="ourPage">
     <div class="header">
             <div class="siteTitle">
-              <h1>Rent 2 cars.</h1>
+              <h1>Wanna Drive</h1>
             </div>
             <?php displayMenu(); 
               if(!empty($_SESSION['login'])){
