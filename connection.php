@@ -55,7 +55,7 @@
     <div class="ourPage">
     <div class="header">
             <div class="siteTitle">
-              <h1>Rent a car .</h1>
+              <h1>Wanna Drive</h1>
             </div>
             <?php displayMenu(); 
               if(!empty($_SESSION['login'])){

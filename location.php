@@ -11,7 +11,7 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8" />
-    <title>Rent a Car</title>
+    <title>Wanna Drive</title>
     <link rel="stylesheet" type="text/css" href="withTest.css" media="screen">
     <style>
         input{
@@ -54,7 +54,7 @@
     <div class="ourPage">
         <div class="header">
             <div class="siteTitle">
-              <h1>Rent a car .</h1>
+              <h1>Wanna Drive</h1>
             </div>
             <?php displayMenu(); 
               if(!empty($_SESSION['login'])){
