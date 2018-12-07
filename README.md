@@ -15,3 +15,5 @@ Pages validées :
 -manageWarehouse
 -ProfilEdit
 -ProfilVisit
+-Carpool
+-DetailedAnnounceCs
